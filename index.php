@@ -46,12 +46,38 @@
                $result = mysqli_query($conexao, $sql);
             
                if (mysqli_num_rows($result) > 0) {
-                   echo "<h2>Existe um registro</h2>";
-               } else{
-                   echo "<h2>Dados incorretos!</h2>";
-               }
-            }
-        }
+                  while ($res_1 = mysqli_fetch_assoc($result)){
+                        $status = $res_1['status'];
+                        $code = $res_1['code'];
+                        $senha = $res_1['senha'];
+                        $painel = $res_1['painel'];
+
+                        if($status == 'Inativo'){
+                            echo "<h2> Você está inativo! </h2>";
+                        }else{
+                            session_start();
+                            $_SESSION['code'] =$code;
+                            $_SESSION['nome'] =$nome;
+                            $_SESSION['senha'] =$senha;
+                            $_SESSION['painel'] =$painel;
+                        
+                            if($painel == 'admin'){
+                                echo "<script language='javascript'>
+                                window.location='admin';</script>";
+                            } else if ($painel == 'aluno'){
+                                echo "<script language='javascript'>
+                                window.location='aluno';</script>";
+                            }else if ($painel == 'professor'){
+                                echo "<script language='javascript'>
+                                window.location='professor';</script>";
+
+                            }else if ($painel == 'tesouraria'){
+                            echo "<script language='javascript'>
+                            window.location='tesouraria';</script>";
+                            }else if ($painel == 'portaria'){
+                            echo "<script language='javascript'>
+                            window.location='portaria';</script>";
+        }   
 
     ?>
         <form name="form" method="post" action="" enctype="multipart/form-data">
