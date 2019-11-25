@@ -1,7 +1,7 @@
 
 
 body{
-    background #5CACEE;
+    background-color:#E0FFFF;
 }
 
 #logo{
@@ -45,7 +45,7 @@ body{
 
 #caixa_login input{
     font :15px Arial, Helvetica, sans-serif;
-    color: #F60;
+    color:  #00008B;
     height: 25px;
     padding :10px;
     width:400px;
@@ -64,7 +64,7 @@ body{
     color: #FFF;
     height: 40px;
     padding:10px;
-    background: #060;
+    background:#0000FF;
     cursor: pointer;
     width:80px;
     margin: 10px 0 0 0;
@@ -72,4 +72,8 @@ body{
      -moz-border-radius: 5px;
     -webkit-border-radius:5px;
     border-radius:5px;
+}
+
+#caixa_login .input:hover{
+    background: #00008B;
 }
