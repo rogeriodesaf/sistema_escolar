@@ -28,6 +28,23 @@
 
 
     <div id="caixa_login">
+
+    <?php
+        if (isset ( $_POST ['button'])){
+            $code = $_POST [ 'code'];
+            $password = $_POST['password'];
+
+            if ($code == ''){
+                echo "<h2> Por favor, digite o número do cartão ou código de acesso! </h2>";
+            }
+            
+                else if ($password == ''){
+                echo "<h2> Por favor, digite sua senha!</h2>";
+                }
+            
+        }
+
+    ?>
         <form name="form" method="post" action="" enctype="multipart/form-data">
             <table>
                 <tr>
