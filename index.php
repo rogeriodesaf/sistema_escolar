@@ -7,7 +7,7 @@
  
  
 
-<script type="text/javascript" src="http://blogparts.giffy.me/0017/parts.js"> </script>
+
 
 <script type="text/javascript" language="javascript" charset="euc-jp" src="http://www.hapinemu.net/fobp/bp037/bp037.js"> </script>
 
@@ -42,7 +42,9 @@
                 <tr>
                     <td><input type="password" name="password" /></td>
                 </tr>
-
+                <tr>
+                <td><input class="input" type="submit" name="button" value="Entrar" /></td>
+                </tr>   
             </table>
         </form>
     </div>
