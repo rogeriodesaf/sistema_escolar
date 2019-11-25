@@ -77,3 +77,21 @@ body{
 #caixa_login .input:hover{
     background: #00008B;
 }
+
+#caixa_login h2{
+    font: 15px Arial, Helvetica, sans-serif;
+    color: #FFF;
+    background:#0000FF;
+    text-align: center;
+    padding: 5px;
+    float: left;
+    margin: 28px 0 10px 10px;
+    border: 1px solid #CCC;
+
+
+-moz-border-radius: 5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+
+
+}

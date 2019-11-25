@@ -41,7 +41,9 @@
                 else if ($password == ''){
                 echo "<h2> Por favor, digite sua senha!</h2>";
                 }
-            
+            else{
+                $sql = mysql_query("SELECT * FROM login WHERE code = '$code' AND senha= '$password ' ");
+            }
         }
 
     ?>
