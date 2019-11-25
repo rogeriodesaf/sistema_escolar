@@ -15,7 +15,7 @@
 
 
 
-<? require "conexao.php" ?>
+<?php require "conexao.php" ?>
 
 </head>
 
@@ -42,7 +42,14 @@
                 echo "<h2> Por favor, digite sua senha!</h2>";
                 }
             else{
-                $sql = mysql_query("SELECT * FROM login WHERE code = '$code' AND senha= '$password ' ");
+                $sql = "SELECT * FROM login WHERE code = '$code' AND senha= '$password ' ";
+               $result = mysqli_query($conexao, $sql);
+            
+               if (mysqli_num_rows($result) > 0) {
+                   echo "<h2>Existe um registro</h2>";
+               } else{
+                   echo "<h2>Dados incorretos!</h2>";
+               }
             }
         }
 
