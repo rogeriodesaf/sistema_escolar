@@ -9,13 +9,10 @@
 
 
 
-<script type="text/javascript" language="javascript" charset="euc-jp" src="http://www.hapinemu.net/fobp/bp037/bp037.js"> </script>
 
 
 
-
-
-<?php require "conexao.php" ?>
+<!-- <?php require "conexao.php" ?> ISTO VAI PUXAR AS INFORMAÇÕES DA PÁGINA CONEXAO.PHP -->
 
 </head>
 
@@ -28,59 +25,38 @@
 
 
     <div id="caixa_login">
+    <div id="caixa_login">
+<?php   //se existir (isset) um método post que foi chamado através do meu botão 'button'é porque o botão foi pressionado, eu quero que ele verifique as minhas caixas de texto
+    if(isset($_POST['button'])){
+         $code = $_POST['code']; //cria uma variável com o nome igual ao da caixa de texto, ele recebe um valor vindo do método POST . Essa variável ($code) recebe o que foi digitado dentro da minha caixa de texto que tem o nome ('code')
+         $password = $_POST['password']; //a nesna coisa aqui. Cria uma variável que vai receber o que for digitado dentro de 'password'
+//vamos testar agora se essas variáveis estão vazias
+        if($code == ''){      //se o valor no campo 'code' for vazio...
+            echo "<h2> Por favor, digite o número do cartão ou código de acesso.</h2>";
 
-    <?php
-        if (isset ( $_POST ['button'])){
-            $code = $_POST [ 'code'];
-            $password = $_POST['password'];
-
-            if ($code == ''){
-                echo "<h2> Por favor, digite o número do cartão ou código de acesso! </h2>";
+        }  
+        else if($password == ''){    //da mesma forma se o campo password for vazio...
+            echo "<h2> Por favor, digite sua senha.</h2>";
+        }  //Só vai dar essas mensagens se os campos estiverem vazios. 
+        else {
+            $sql = "SELECT * FROM login WHERE code ='$code' AND senha='$password' "   ;  //essa função faz uma consulta no banco de dados.Selecione na tabela login os campos code e senha.
+            $result = mysqli_query($conexao, $sql);//criei uma variável que vai fazer uma consulta no banco de dados e na conexão caso os campos não estejam vazios. 
+            if(mysqli_num_rows($result) >0){ //mysqli_num_rows consulta nas linhas do banco de dados. Se essa consulta for maior que 0 significa que tem alguma coisa no banco. Ou seja, se tiver um cógido e uma senha .
+            echo "<h2>Existe um registro</h2>";
+            } else{
+                echo "<h2>Dados incorretos</h2>";
             }
+        }
+    } 
+
+    
+?>
             
-                else if ($password == ''){
-                echo "<h2> Por favor, digite sua senha!</h2>";
-                }
-            else{
-                $sql = "SELECT * FROM login WHERE code = '$code' AND senha= '$password ' ";
-               $result = mysqli_query($conexao, $sql);
             
-               if (mysqli_num_rows($result) > 0) {
-                  while ($res_1 = mysqli_fetch_assoc($result)){
-                        $status = $res_1['status'];
-                        $code = $res_1['code'];
-                        $senha = $res_1['senha'];
-                        $painel = $res_1['painel'];
+                       
+                     
 
-                        if($status == 'Inativo'){
-                            echo "<h2> Você está inativo! </h2>";
-                        }else{
-                            session_start();
-                            $_SESSION['code'] =$code;
-                            $_SESSION['nome'] =$nome;
-                            $_SESSION['senha'] =$senha;
-                            $_SESSION['painel'] =$painel;
-                        
-                            if($painel == 'admin'){
-                                echo "<script language='javascript'>
-                                window.location='admin';</script>";
-                            } else if ($painel == 'aluno'){
-                                echo "<script language='javascript'>
-                                window.location='aluno';</script>";
-                            }else if ($painel == 'professor'){
-                                echo "<script language='javascript'>
-                                window.location='professor';</script>";
-
-                            }else if ($painel == 'tesouraria'){
-                            echo "<script language='javascript'>
-                            window.location='tesouraria';</script>";
-                            }else if ($painel == 'portaria'){
-                            echo "<script language='javascript'>
-                            window.location='portaria';</script>";
-        }   
-
-    ?>
-        <form name="form" method="post" action="" enctype="multipart/form-data">
+           <form name="form" method="post" action="" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td><h1>Nº Cartão ou Código de Acesso: </h1></td>
@@ -105,7 +81,6 @@
 
 
 </body>
-
 
 
 
