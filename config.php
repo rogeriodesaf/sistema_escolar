@@ -23,7 +23,9 @@ else if($senha == ''){
     echo "<script language='javascript'>window.location='../index.php';</script>";
 }
 else{
-
+    if($painel_atual!= $painel){
+        echo "<script language='javascript'>window.location='../index.php';</script>";
+    }
 }
 
 

@@ -1,6 +1,3 @@
-<?php $painel_atual = "admin"; ?>
-
-
 <html>
 
 

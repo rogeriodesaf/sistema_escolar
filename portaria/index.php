@@ -1,5 +1,4 @@
-<?php $painel_atual = "admin"; ?>
-
+<?php $painel_atual = "portaria"; ?>
 
 <html>
 
