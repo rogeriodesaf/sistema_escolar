@@ -1,19 +1,28 @@
-<?php
+<html>
 
 
-require "config.php";
+<head>
+<title> sem título </title>
 
-
-
-
-
-
+<?php require "../config.php"; ?>
 
 
 
+</head>
+
+<body>
 
 
 
 
 
-?>
+</body>
+
+
+
+
+
+
+
+
+</html>
