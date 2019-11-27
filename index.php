@@ -42,14 +42,26 @@
             $sql = "SELECT * FROM login WHERE code ='$code' AND senha='$password' "   ;  //essa função faz uma consulta no banco de dados.Selecione na tabela login os campos code e senha.
             $result = mysqli_query($conexao, $sql);//criei uma variável que vai fazer uma consulta no banco de dados e na conexão caso os campos não estejam vazios. 
             if(mysqli_num_rows($result) >0){ //mysqli_num_rows consulta nas linhas do banco de dados. Se essa consulta for maior que 0 significa que tem alguma coisa no banco. Ou seja, se tiver um cógido e uma senha .
-            echo "<h2>Existe um registro</h2>";
-            } else{
+                    while($res_1 = mysqli_fetch_assoc($result)){
+                        $status = $res_1['status']; 
+                        $code = $res_1['code']; 
+                        $senha = $res_1['senha']; 
+                        $nome = $res_1['nome']; 
+                        $painel = $res_1['painel'];  //vou criar uma variavel e passar para essa variável que estiver nesse campo específico da tabela.
+
+                    if($status == 'Inativo'){
+                        echo "<h2> Usuário Inativo.</h2>";
+                    }
+                      //ele vai buscar em todas as linhas que ele encontrou
+                    }//fechamento do while
+            } //fechamento do if
+            else{
                 echo "<h2>Dados incorretos</h2>";
             }
-        }
-    } 
+        }//fechamento do else
+    }//fechamento do if 
 
-    
+
 ?>
             
             
