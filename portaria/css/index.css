@@ -1,0 +1,74 @@
+#box{
+	width:500px;
+	margin:250px auto;
+	height:auto;
+	padding:10px;
+	border:1px solid #999;
+	border-radius:10px;
+	}
+	
+#porteiro{
+	text-align:center;
+	width:500px;
+	}
+#porteiro h1{
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#porteiro a{
+	margin:0 0 0 100px;
+	color:#333;
+	}
+#porteiro a:hover{
+	color:#060;
+	}
+	
+#logo{
+	margin:40px 0 0 0;
+	text-align:center;
+	width:500px;
+	}
+	
+	
+	
+#campo_busca{
+	text-align:center;
+	width:500px;
+	margin:20px 0 0 0;
+	}
+#campo_busca input{
+	float:left;
+	height:40px;
+	margin:0 0 0 30px;
+	color:#900;
+	font:16px Arial, Helvetica, sans-serif;
+	text-align:center;
+	padding:10px;
+	width:320px;
+	border:1px solid #CCC;
+	
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	}
+#campo_busca .input{
+	background:url(../img/button.png);
+	float:left;
+	height:60px;
+	margin:0 0 0 10px;
+	cursor:pointer;
+	padding:10px;
+	border:0;
+	width:100px;
+	}
+#campo_busca h2{
+	font:15px Arial, Helvetica, sans-serif;
+	width:500px;
+	text-align:center;
+	color:#F00;
+	}
+#campo_busca h3{
+	font:15px Arial, Helvetica, sans-serif;
+	width:500px;
+	text-align:center;
+	color:#666;
+	}
