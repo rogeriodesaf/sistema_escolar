@@ -31,7 +31,7 @@
          $code = $_POST['code']; //cria uma variável com o nome igual ao da caixa de texto, ele recebe um valor vindo do método POST . Essa variável ($code) recebe o que foi digitado dentro da minha caixa de texto que tem o nome ('code')
          $password = $_POST['password']; //a nesna coisa aqui. Cria uma variável que vai receber o que for digitado dentro de 'password'
 //vamos testar agora se essas variáveis estão vazias
-        if($code == ''){      //se o valor no campo 'code' for vazio...
+    if($code == ''){      //se o valor no campo 'code' for vazio...
             echo "<h2> Por favor, digite o número do cartão ou código de acesso.</h2>";
 
         }  
@@ -49,10 +49,23 @@
                         $nome = $res_1['nome']; 
                         $painel = $res_1['painel'];  //vou criar uma variavel e passar para essa variável que estiver nesse campo específico da tabela.
 
-                    if($status == 'Inativo'){
+                        if($status == 'Inativo'){
                         echo "<h2> Usuário Inativo.</h2>";
-                    }
-                      //ele vai buscar em todas as linhas que ele encontrou
+                        }
+                            else{
+                                session_start(); //variável global de sessão
+                                $_SESSION['code'] = $code;
+                                $_SESSION['nome'] = $nome;
+                                $_SESSION['senha'] = $senha;
+                                $_SESSION['painel'] = $painel;
+
+                                if($painel == 'admin') {echo "<script language='javascript' > window.location = 'admin';</script>"; }   //ele vai buscar em todas as linhas que ele encontrou
+                        
+                                else if($painel == 'aluno') {echo "<script language='javascript' > window.location = 'aluno';</script>";}
+                                else if($painel == 'professor') {echo "<script language='javascript' > window.location = 'professor';</script>";}
+                                else if($painel == 'portaria') {echo "<script language='javascript' > window.location = 'portaria';</script>";}
+                                else if($painel == 'tesouraria') { echo "<script language='javascript' > window.location = 'tesouraria';</script>";}
+                            } //fechamento do else
                     }//fechamento do while
             } //fechamento do if
             else{
