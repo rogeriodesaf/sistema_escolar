@@ -33,7 +33,32 @@
             echo "<script language='javascript'> window.alert ('Por favor, digite o seu cpf!'); </script>";
 
         }  
-    }
+        else {
+          $sql = "SELECT * FROM estudantes WHERE code ='$cpf' OR nome='$cpf' OR  cpf = '$cpf' OR rg = '$cpf'"   ;  //essa função faz uma consulta no banco de dados.Selecione na tabela login os campos code e senha.
+          $result = mysqli_query($conexao, $sql);//criei uma variável que vai fazer uma consulta no banco de dados e na conexão caso os campos não estejam vazios. 
+          if(mysqli_num_rows($result) <=0){ //mysqli_num_rows consulta nas linhas do banco de dados. Se essa consulta for maior que 0 significa que tem alguma coisa no banco. Ou seja, se tiver um cógido e uma senha .
+                 echo "<br><br><br><br><br><br><br><h2> Aluno não encontrado, verifique a informação inserida!</h2>";
+          }
+          else{
+              while($res_1 = mysqli_fetch_assoc($result)){
+            $nome = $res_1 ['nome'];
+            $cpf = $res_1 ['cpf'];
+            $code = $res_1 ['code'];
+            echo "<br><br><br><br>".$nome;
+          }
+            
+    
+                  }
+          }
+    
+    
+    
+                  }
+
+                
+
+
+
 ?>
 
 <br><br><br><br><h3><strong>Aluno:</strong>  <strong>Nº de matricula:</strong> <strong>RG:</strong>  <a href="index.php?pg=confirma&code_a=<img src="../img/correto.jpg" title="Confirmar" border="0" /></a> <a href="index.php"><img src="img/delete.jpg" width="24px" title="Cancelar" /></a> </h3><input type="hidden" name="codes" value="" />  
