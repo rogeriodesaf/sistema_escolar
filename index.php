@@ -70,7 +70,7 @@
             } //fechamento do if
             else{
                 echo "<h2>Dados incorretos</h2>";
-            }
+            }//fechamento else
         }//fechamento do else
     }//fechamento do if 
 

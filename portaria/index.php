@@ -14,7 +14,7 @@
   <div id="box">
  
  <div id="porteiro">
-  <h1><strong>Seu código é:</strong>  <a href="../config.php?acao=quebra"><strong>SAIR</strong></a></h1>
+  <h1><strong>Seu código é:</strong> <?php echo $code ?> <a href="../config.php?acao=quebra"><strong>SAIR</strong></a></h1>
  </div><!-- porteiro -->
  
  <div id="logo">
@@ -43,17 +43,9 @@
               while($res_1 = mysqli_fetch_assoc($result)){
             $nome = $res_1 ['nome'];
             $cpf = $res_1 ['cpf'];
-            $code = $res_1 ['code'];
-            echo "<br><br><br><br>".$nome;
-          }
+            $rg = $res_1 ['rg'];
             
-    
-                  }
-          }
-    
-    
-    
-                  }
+        
 
                 
 
@@ -61,10 +53,34 @@
 
 ?>
 
-<br><br><br><br><h3><strong>Aluno:</strong>  <strong>Nº de matricula:</strong> <strong>RG:</strong>  <a href="index.php?pg=confirma&code_a=<img src="../img/correto.jpg" title="Confirmar" border="0" /></a> <a href="index.php"><img src="img/delete.jpg" width="24px" title="Cancelar" /></a> </h3><input type="hidden" name="codes" value="" />  
+<br><br><br><br><h3><strong>Aluno:</strong> <?php echo $nome;?> <strong>Nº de matricula:</strong>  <?php echo $cpf;?> <strong>RG:</strong>  <?php echo $rg;?>
+ <a href="index.php?pg=confirma&code_a=<?php echo $code; ?> "> <img src="../img/simbolo-certo-1.png" title="Confirmar" border="0" width="22px"/></a>
+ <a href="index.php"><img src="../img/images.jpg" width="24px" title="Cancelar" width="22px"/></a> </h3>
+ <input type="hidden" name="codes" value="" />  
  
+<?php   }
+            
+    
+          }
+  }
 
 
+
+          }
+
+          ?>
+
+<?php 
+if( @$_GET['pg'] == 'confirma'){
+  $data = date("d/m/Y H:i:s");
+  $date = data("d/m/Y");
+
+  $code_a = $_GET['code_a'];
+  $sql ="INSERT INTO confirma_entrada_de_alunos(date,  data_hoje, porteiro, code_aluno) VALUES ('$data','$date','$code',''code_a')";
+}
+
+
+?>
 
  </div><!-- campo_busca -->
  <br><br><br>
