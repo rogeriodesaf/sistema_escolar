@@ -14,7 +14,7 @@
   <div id="box">
  
  <div id="porteiro">
-  <h1><strong>Seu código é:</strong> <?php echo $code ?> <a href="../config.php?acao=quebra"><strong>SAIR</strong></a></h1>
+  <h1><strong>Seu código é:</strong> <?php echo $code ?> <a href="../config.php?acao=quebra"> <a href="../config.php?acao=quebra"> <strong> SAIR</strong></a></h1>
  </div><!-- porteiro -->
  
  <div id="logo">
