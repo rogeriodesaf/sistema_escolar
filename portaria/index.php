@@ -27,6 +27,7 @@
   </form>
   <?php  
     if(isset($_POST['send'])){  //se o botão send for pressionado ele vai criar uma variável chamada cpf que vai receber o que vier do campo CPF. 
+        $_GET['pg'] = '';
          $cpf = $_POST['cpf'];
         
     if($cpf == ''){      //se o meu cpf for vazio.
@@ -73,10 +74,12 @@
 <?php 
 if( @$_GET['pg'] == 'confirma'){
   $data = date("d/m/Y H:i:s");
-  $date = data("d/m/Y");
+  $date = date("d/m/Y");
 
   $code_a = $_GET['code_a'];
-  $sql ="INSERT INTO confirma_entrada_de_alunos(date,  data_hoje, porteiro, code_aluno) VALUES ('$data','$date','$code',''code_a')";
+  $sql ="INSERT INTO confirma_entrada_de_alunos(date,  data_hoje, porteiro, code_aluno) VALUES ('$data','$date','$code','$code_a')";
+  mysqli_query($conexao, $sql);
+  echo "<script language='javascript'>window.alert('A entrada do aluno foi confirmada!');</script>";
 }
 
 
