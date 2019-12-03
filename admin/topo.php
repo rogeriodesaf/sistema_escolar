@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <? require "../config.php"; ?>  <!-- Requie          -->
+ <? require "../config.php"; ?>  <!-- Require         -->
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
@@ -65,7 +65,7 @@
    <img src="img/separador_menu.png" />
    <li><a href="">CURSOS E DISCIPLINAS</a>
     <ul>
-     <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Curso</a></li>
+     <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Curso</a></li>   <!--Quando clicar em cadastrar cursos ele vai redirecionar para uma variável global chamada pg=curso/ SE PG FOR IGUAL A CURSO ELE VAI MOSTRAR ABAIXO DO TOPO DA PÁGINA OS CURSOS E DISCIPLINAS.                 -->
      <li><a href="cursos_e_disciplinas.php?pg=disciplina">Cadastrar Disciplina</a></li>
      <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplinas">Cursos & Disciplinas</a></li>
     </ul>

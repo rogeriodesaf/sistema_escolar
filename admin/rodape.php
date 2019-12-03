@@ -7,7 +7,7 @@
 
 <body>
 <div id="box_rodape">
- <h1 class="h1">Bela School - Desenvolvido por Hugo Vasconcelos</h1>
+ <h1 class="h1"> - Desenvolvido por Rogério de Sá</h1>
 </div><!-- box_rodape -->
 </body>
 </html>
