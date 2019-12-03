@@ -2,15 +2,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> Sistema Escolar</title> 
-<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+<link rel="stylesheet" href="css/estilo.css">
 <link rel="shortcut icon" href="img/iconfinder_Education_3069198.ico"/>
  
- 
-
-
-
-
-
 
 <!-- <?php require "conexao.php" ?> ISTO VAI PUXAR AS INFORMAÇÕES DA PÁGINA CONEXAO.PHP -->
 
@@ -23,15 +17,13 @@
         <img src="img/STCN.png">
     </div>
 
-
     <div id="caixa_login">
-    <div id="caixa_login">
-<?php   //se existir (isset) um método post que foi chamado através do meu botão 'button'é porque o botão foi pressionado, eu quero que ele verifique as minhas caixas de texto
-    if(isset($_POST['button'])){
-         $code = $_POST['code']; //cria uma variável com o nome igual ao da caixa de texto, ele recebe um valor vindo do método POST . Essa variável ($code) recebe o que foi digitado dentro da minha caixa de texto que tem o nome ('code')
-         $password = $_POST['password']; //a nesna coisa aqui. Cria uma variável que vai receber o que for digitado dentro de 'password'
-//vamos testar agora se essas variáveis estão vazias
-    if($code == ''){      //se o valor no campo 'code' for vazio...
+        <?php   //se existir (isset) um método post que foi chamado através do meu botão 'button'é porque o botão foi pressionado, eu quero que ele verifique as minhas caixas de texto
+            if(isset($_POST['button'])){
+                $code = $_POST['code']; //cria uma variável com o nome igual ao da caixa de texto, ele recebe um valor vindo do método POST . Essa variável ($code) recebe o que foi digitado dentro da minha caixa de texto que tem o nome ('code')
+                $password = $_POST['password']; //a nesna coisa aqui. Cria uma variável que vai receber o que for digitado dentro de 'password'
+        //vamos testar agora se essas variáveis estão vazias
+            if($code == ''){      //se o valor no campo 'code' for vazio...
             echo "<h2> Por favor, digite o número do cartão ou código de acesso.</h2>";
 
         }  
@@ -65,17 +57,17 @@
                                 else if($painel == 'professor') {echo "<script language='javascript' > window.location = 'professor';</script>";}
                                 else if($painel == 'portaria') {echo "<script language='javascript' > window.location = 'portaria';</script>";}
                                 else if($painel == 'tesouraria') { echo "<script language='javascript' > window.location = 'tesouraria';</script>";}
-                            } //fechamento do else
-                    }//fechamento do while
-            } //fechamento do if
-            else{
-                echo "<h2>Dados incorretos</h2>";
-            }//fechamento else
-        }//fechamento do else
-    }//fechamento do if 
+                                    } //fechamento do else
+                            }//fechamento do while
+                    } //fechamento do if
+                    else{
+                        echo "<h2>Dados incorretos</h2>";
+                    }//fechamento else
+                }//fechamento do else
+            }//fechamento do if 
 
 
-?>
+            ?>
             
             
                        
@@ -100,9 +92,8 @@
                 </tr>   
             </table>
         </form>
+
     </div>
-
-
 
 
 </body>

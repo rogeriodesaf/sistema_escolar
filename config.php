@@ -23,11 +23,11 @@ else if($nome == ''){
 else if($senha == ''){
     echo "<script language='javascript'>window.location='../index.php';</script>";
 }
-else{
-    if($painel_atual!= $painel){
-        echo "<script language='javascript'>window.location='../index.php';</script>";
-    }
-}
+// else{
+//     if($painel_atual!= $painel){
+//         echo "<script language='javascript'>window.location='../index.php';</script>";
+//     }
+// }
 
 
 
@@ -40,6 +40,6 @@ if (@$_GET['acao'] == 'quebra') { session_destroy();
      $_SESSION['senha'];
      $_SESSION['painel'];
 
-     echo "<script=language='javascript'>window.location='index.php';</script>";
+     echo "<script language='javascript'>window.location='index.php';</script>";
 }
 ?>
