@@ -9,25 +9,26 @@
 	
 #box_curso{
 	width:978px;
-	background:#E1E1C4;
+	background:#0FF;
 	height:auto;
 	float:left;
 	text-align:left;
-	margin:-20px 0 20px 190px;
+	margin: -17px 14px 25px 470px;
 	border:1px solid #333;
+
 	}
 #box_curso .a2{
 	font:12px Arial, Helvetica, sans-serif;
 	margin:30px 0 10px 37px;
 	color:#FFF;
-	background:#090;
+	background:#0000CD;
 	text-decoration:none;
 	padding:10px;
 	border:1px solid #000;
 	}
 #box_curso .a2:hover{
 	border:1px solid #0FF;
-	background:#030;
+	background:#ADD8E6;
 	}
 #box_curso h1{
 	font:20px Arial, Helvetica, sans-serif;
@@ -71,7 +72,7 @@
 	width:100px;
 	padding:5px;
 	height:33px;
-	background:#090;
+	background:#0000CD;
 	color:#FFF;
 	cursor:pointer;
 	border:1px solid #CCC;
@@ -95,7 +96,7 @@
 	font:12px Arial, Helvetica, sans-serif;
 	margin:30px 0 10px 37px;
 	color:#FFF;
-	background:#090;
+	background:#0000CD;
 	text-decoration:none;
 	padding:10px;
 	border:1px solid #000;
@@ -152,7 +153,7 @@
 	width:100px;
 	padding:5px;
 	height:33px;
-	background:#090;
+	background:#0000CD;
 	color:#FFF;
 	cursor:pointer;
 	border:1px solid #CCC;
@@ -166,25 +167,26 @@
 	
 #box_curso{
 	width:978px;
-	background:#E1E1C4;
+	background:#6495ED;
 	height:auto;
 	float:left;
 	text-align:left;
-	margin:-20px 0 20px 190px;
+	margin: -17px 14px 25px 470px ;
 	border:1px solid #333;
+	display: table;
 	}
 #box_curso .a2{
 	font:12px Arial, Helvetica, sans-serif;
 	margin:30px 0 10px 37px;
 	color:#FFF;
-	background:#090;
+	background:#0000CD;
 	text-decoration:none;
 	padding:10px;
 	border:1px solid #000;
 	}
 #box_curso .a2:hover{
 	border:1px solid #0FF;
-	background:#030;
+	background:#191970;
 	}
 #box_curso h1{
 	font:20px Arial, Helvetica, sans-serif;
@@ -228,7 +230,7 @@
 	width:100px;
 	padding:5px;
 	height:33px;
-	background:#090;
+	background:#0000CD;
 	color:#FFF;
 	cursor:pointer;
 	border:1px solid #CCC;
@@ -252,7 +254,7 @@
 	font:12px Arial, Helvetica, sans-serif;
 	margin:30px 0 10px 37px;
 	color:#FFF;
-	background:#090;
+	background:#0000CD;
 	text-decoration:none;
 	padding:10px;
 	border:1px solid #000;

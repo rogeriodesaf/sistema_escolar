@@ -34,7 +34,8 @@
 
 		});
 
-	</script>
+    </script>
+    <?php require "../conexao.php"; ?>
 </head>
 
 <body>

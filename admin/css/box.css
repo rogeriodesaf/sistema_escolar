@@ -1,0 +1,11 @@
+#box_curso{
+	width:978px;
+	background:#E1E1C4;
+	height:auto;
+	float:left;
+	text-align:left;
+    margin: -17px 14px 25px 470px !important;
+    margin-left: 578px;
+	border:1px solid #333;
+	display: table;
+	}
