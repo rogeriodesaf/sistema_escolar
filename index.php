@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> Sistema Escolar</title> 
-<link rel="stylesheet" href="css/estilo.css">
+<link rel="stylesheet" href="admin/css/estilo.css">
 <link rel="shortcut icon" href="img/iconfinder_Education_3069198.ico"/>
  
 
