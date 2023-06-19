@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import Input from '../../forms/Input'
 import styles from '../../forms/Form.module.css'
 import {Link} from 'react-router-dom'
 
+/* context */
+import { Context } from '../../../context/UserContext';
+
 function Register() {
   
-  
-  
-
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
     role: 'Aluno',
@@ -18,8 +18,10 @@ function Register() {
    
   });
 
+  const {register} = useContext(Context)
+
   function handleChange(e){
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   }
 
   // Valores pré-definidos
@@ -30,14 +32,22 @@ function Register() {
 
   // Definir os valores pré-definidos quando o componente é renderizado
   useState(() => {
-    setFormData({ ...formData, ...preFilledValues });
+    setUser({ ...user, ...preFilledValues });
   }, []);
 
     function handleSubmit  (e){
     e.preventDefault();
     // Lógica para enviar os dados do formulário
-    console.log(formData)
-  };
+   register(user)
+
+    
+    // Limpar os campos do formulário
+  document.getElementById('email').value = '';
+  document.getElementById('password').value = '';
+  document.getElementById('firstName').value = '';
+  document.getElementById('lastName').value = '';
+  }
+  
 
   return (
     <div >
@@ -63,7 +73,7 @@ function Register() {
         text= 'Função'
         type= 'text'
         name= 'role'
-        value={formData.role}
+        value={user.role}
         handleOnChange = {handleChange}  
         disabled // Para evitar que o campo seja editável      
         />

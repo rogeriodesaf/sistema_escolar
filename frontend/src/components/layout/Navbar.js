@@ -18,6 +18,9 @@ const Navbar = () => {
         <li>
           <Link to="/register">Cadastrar</Link>
         </li>
+        <li>
+          <Link to="/professor/register">Cadastrar Professor</Link>
+        </li>
       </ul>
     </nav>
   );

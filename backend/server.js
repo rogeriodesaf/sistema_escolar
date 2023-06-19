@@ -3,6 +3,7 @@ const app = express();
 const port = 5000;
 const connectToDatabase = require('./db');
 const authMiddleware = require('./helpers/authMiddleware');
+const cors = require('cors');
 
 
 // Conecte-se ao banco de dados
@@ -27,7 +28,9 @@ const historicoRoutes = require('./routes/historicoAluno')
 
 // Resto do código do servidor
 // ...
-
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
 
 
 // Middlewares de parser de JSON e URL encoded
