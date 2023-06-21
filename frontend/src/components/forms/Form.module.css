@@ -30,3 +30,36 @@
     color: #16479d;
     font-weight: bold;
 }
+
+.form_container select{
+  
+        appearance: none; /* Remove a aparência padrão do select */
+        padding: .7em; /* Adicione um espaçamento interno para melhor legibilidade */
+        border: 1px solid #ccc; /* Adicione uma borda */
+        border-radius: 8px; /* Adicione bordas arredondadas */
+        background-color: #fff; /* Defina a cor de fundo */
+        font-size: 1.1em;
+    font-weight: bold; /* Defina o tamanho da fonte */
+        min-width: 100px;
+        min-height: 2.5em;
+        width: 100%;
+
+          
+}
+
+.form_container select,option {
+    color: #7b7b;
+    padding: .7em;
+    border:  1px solid #777;
+    border-radius: 5px;
+} 
+
+
+.form_container:focus {
+    outline: none; /* Remova o contorno ao receber foco */
+    border-color:  #777; /* Mude a cor da borda quando o select receber foco */
+  }
+
+
+
+

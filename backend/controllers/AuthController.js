@@ -62,7 +62,7 @@ module.exports = class AuthController {
 
       // Verifique se o usuário foi encontrado
       if (!user) {
-        return res.status(404).json({ error: 'Usuário não encontrado' });
+        return res.status(404).json({ error: 'Usuário não encontrado' , message: 'Mensagem de erro específica' });
       }
 
       // Verifique se a senha fornecida é válida

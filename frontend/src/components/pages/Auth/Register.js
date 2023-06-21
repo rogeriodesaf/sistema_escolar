@@ -12,7 +12,7 @@ function Register() {
   const [user, setUser] = useState({
     email: '',
     password: '',
-    role: 'Aluno',
+    role: 'aluno',
     firstName: '',
     lastName: ''
    
@@ -26,7 +26,7 @@ function Register() {
 
   // Valores pré-definidos
   const preFilledValues = {
-    role: 'Aluno',
+    role: 'aluno',
     
   };
 

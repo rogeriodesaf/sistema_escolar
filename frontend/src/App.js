@@ -6,13 +6,14 @@ import Login from './components/pages/Auth/Login';
 
 import Register from './components/pages/Auth/Register';
 import ProfessorRegister from './components/pages/Auth/ProfessorRegister';
-
+import Home from './components/pages/Home';
 
 
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Container from './components/layout/Container';
+import Message  from './components/layout/Message';
 
 /**CONTEXT */
 import { UserProvider } from './context/UserContext';
@@ -27,8 +28,13 @@ function App() {
     <Router>
       <UserProvider>
         <Navbar /> {/* Incluindo o Navbar */}
+        <Message/>
         <Container>
+      
           <Switch>
+          <Route path="/home">
+              <Home />
+            </Route>
             <Route path="/login">
               <Login />
             </Route>
@@ -40,7 +46,7 @@ function App() {
                <ProfessorRegister />
                </Route>
            </ProfessorProvider>  
-          
+           
           </Switch>
         </Container>
         <Footer /> {/* Incluindo o Footer */}

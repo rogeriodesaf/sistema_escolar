@@ -14,7 +14,7 @@ module.exports = class ProfessorController {
       // Verifique se o professor já está registrado
       const existingProfessor = await Professor.findOne({ email });
       if (existingProfessor) {
-        return res.status(400).json({ error: 'Professor já registrado' });
+        return res.status(500).json({ error: 'Este e-mail já está em uso, tente outro.', message: 'Mensagem de erro específica' });
       }
       // Gera um novo salt com fator de custo 10
       const salt = await bcrypt.genSalt(10);
