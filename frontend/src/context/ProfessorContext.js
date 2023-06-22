@@ -1,14 +1,26 @@
 import React, { createContext } from 'react';
 import useAuthProfessor from '../hooks/useAuthProfessor';
 
-export const ProfessorContext = createContext();
 
-export const ProfessorProvider = ({ children }) => {
-  const { registerProfessor } = useAuthProfessor();
 
-  return (
-    <ProfessorContext.Provider value={{ registerProfessor }}>
-      {children}
-    </ProfessorContext.Provider>
-  );
-};
+const ProfessorContext = createContext()
+
+
+function ProfessorProvider({children}){
+    const  {authenticated,registerProfessor,registerCoordenador} = useAuthProfessor()
+ 
+    return(
+        <ProfessorContext.Provider value={{authenticated,registerProfessor,registerCoordenador}}>
+            {children}
+        </ProfessorContext.Provider>
+
+    )
+
+
+  
+    
+
+
+}
+
+export {ProfessorContext,ProfessorProvider}

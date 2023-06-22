@@ -42,6 +42,30 @@ export default function useAuthProfessor() {
  
  }
 
+
+ async function registerCoordenador(user){
+
+  const {setFlashMessage} = useFlashMessage()
+
+  let msgText = 'Cadastro realizado com sucesso!'
+  let msgType = 'sucess'
+
+
+
+try {
+const response = await api.post('/api/auth/coordenador/register', user);
+console.log(response.data);
+} catch(error){
+           
+msgText = error.response.data.error
+msgType = 'error'
+             
+   }
+setFlashMessage(msgText,msgType)   
+
+}
+
+
  async function loginProfessor(user){
   const {setFlashMessage} = useFlashMessage()
 
@@ -86,7 +110,7 @@ async function logoutProfessor(){
 
   
 
-  return { authenticated,registerProfessor , loginProfessor,logoutProfessor };
+  return { authenticated,registerProfessor , loginProfessor,logoutProfessor,registerCoordenador };
 }
 
 

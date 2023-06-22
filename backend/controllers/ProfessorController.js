@@ -52,7 +52,7 @@ module.exports = class ProfessorController {
 
       // Verifique se o usuário foi encontrado
       if (!user) {
-        return res.status(404).json({ error: 'Usuário não encontrado' });
+        return res.status(404).json({ error: 'Usuário não encontrado!' });
       }
 
       // Verifique se a senha fornecida é válida

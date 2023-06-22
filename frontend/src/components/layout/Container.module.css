@@ -6,21 +6,3 @@
 }
 
 
-.custom-select {
-    appearance: none; /* Remove a aparência padrão do select */
-    padding: 8px 12px; /* Adicione um espaçamento interno para melhor legibilidade */
-    border: 1px solid #ccc; /* Adicione uma borda */
-    border-radius: 5px; /* Adicione bordas arredondadas */
-    background-color: #fff; /* Defina a cor de fundo */
-    font-size: 16px; /* Defina o tamanho da fonte */
-    /*width: 200px; /* Defina a largura do select */
-    min-width: 100px;
-    min-height: 2.5em;
-    width: 100%;
-  }
-  
-  .custom-select:focus {
-    outline: none; /* Remova o contorno ao receber foco */
-    border-color: #ff0055; /* Mude a cor da borda quando o select receber foco */
-  }
-  

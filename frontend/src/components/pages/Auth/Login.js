@@ -14,7 +14,7 @@ function Login() {
 
   const [userType, setUserType] = useState(''); // Estado para armazenar o tipo de usuário
   const [user, setUser] = useState({})
-  const {login, loginProfessor} = useContext(Context)
+  const {login, loginProfessor,loginCoordenador} = useContext(Context)
   function handleChange(e){
     setUser({ ...user, [e.target.name]: e.target.value });
   }
@@ -31,9 +31,12 @@ function Login() {
 // só pra testar
     if (userType === 'professor') {
      await loginProfessor(user, userType);
-    } else {
+    } 
+    else if (userType === 'coordenador'){
+      await loginCoordenador(user, userType);
+    }else if (userType === 'aluno'){
       await login(user, userType);
-    }
+    } 
     // Desativar o indicador de carregamento após o login
   setLoading(false);
    
@@ -59,6 +62,7 @@ function Login() {
             <option value="">Selecione um tipo de usuário</option>
             <option value="aluno">Aluno</option>
             <option value="professor">Professor</option>
+            <option value="coordenador">Coordenador</option>
           </select>
         <Input
         text= 'email'

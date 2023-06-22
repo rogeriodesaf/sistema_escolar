@@ -18,20 +18,24 @@ const Navbar = () => {
 
       </div>
       <ul>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
+        
         {authenticated ? (
           <>
+          <li>
+              <Link to="/user/profile">Perfil Aluno</Link>
+            </li>
          <li onClick={logout}>Sair</li>
           </>
         ) : (
           <>
             <li>
+          <Link to="/login">Login</Link>
+            </li>
+            <li>
               <Link to="/register">Cadastrar Aluno</Link>
             </li>
             <li>
-              <Link to="/professor/register">Cadastrar Professor</Link>
+              <Link to="/professor/register">Cadastrar Professor/Coordenador</Link>
             </li>
           </>
         )}

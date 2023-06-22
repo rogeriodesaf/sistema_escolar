@@ -7,6 +7,7 @@ import Login from './components/pages/Auth/Login';
 import Register from './components/pages/Auth/Register';
 import ProfessorRegister from './components/pages/Auth/ProfessorRegister';
 import Home from './components/pages/Home';
+import Profile from './components/pages/Users/Profile';
 
 
 
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/user/profile">
+              <Profile />
             </Route>
            <ProfessorProvider>
             <Route path="/professor/register">

@@ -62,6 +62,28 @@ export default function useAuth(){
         setFlashMessage(msgText, msgType);
       }
       
+      async function loginCoordenador(user) {
+        const { setFlashMessage } = useFlashMessage();
+      
+        let msgText = 'Login realizado com sucesso!';
+        let msgType = 'success';
+      
+        try {
+          const data = await api.post('/api/auth/coordenador/login', user).then((response) => {
+            return response.data;
+          });
+      
+          await authUser(data);
+          console.log(data);
+        } catch (error) {
+          msgText = error.response.data.error;
+          msgType = 'error';
+        }
+      
+        setFlashMessage(msgText, msgType);
+      }
+      
+
 
 
     async function login(user,userType){
@@ -87,9 +109,12 @@ export default function useAuth(){
                     ///console.log(data)
                    /// await authUser(data)
 
-                } else if (userType !='aluno') {
+                } else if (userType ==='professor') {
                     loginProfessor(user)
-                    }
+                    } else if (userType ==='coordenador') {
+                      loginCoordenador(user)
+                      }
+             
            
                 
             }
@@ -125,5 +150,5 @@ export default function useAuth(){
       
       
 
-    return {authenticated, register, login, logout,loginProfessor}
+    return {authenticated, register, login, logout,loginProfessor,loginCoordenador}
 }
