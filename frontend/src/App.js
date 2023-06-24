@@ -10,6 +10,8 @@ import Home from './components/pages/Home';
 import Profile from './components/pages/Users/Profile';
 
 import DisciplinaForm from './components/forms/DisciplinaForm';
+import DisciplineList from './components/pages/Disciplinas/DisciplineList';
+
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -40,6 +42,10 @@ function App() {
         <Route path="/cadastro-disciplinas">
           <DisciplinaForm updateUserType={updateUserType} />
         </Route>
+        <Route path="/disciplinas-list">
+        <DisciplineList />
+        </Route>
+
           <Switch>
           <Route path="/home">
               <Home />

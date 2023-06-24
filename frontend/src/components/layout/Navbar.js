@@ -33,11 +33,15 @@ const Navbar = () => {
 
 
             {authenticated && userType === 'coordenador' && (
-             
+             <>
               <li>
                 <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
+               
               </li>
-              
+              <li>
+              <Link to="/disciplinas-list">Listagem de disciplinas</Link>
+            </li>
+            </>
             )}
              
 
