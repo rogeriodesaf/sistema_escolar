@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
 import useFlashMessage from './useFlashMessage';
 
 
-export default function useAuth(){ 
+export default function useDisciplina(){ 
     const [authenticated , setAuthenticated] = useState(false)
     const {setFlashMessage} = useFlashMessage()
     const history = useHistory()
@@ -19,28 +19,32 @@ export default function useAuth(){
         }
     },[]);
 
-    async function register(user){
+    async function createDisciplina(disciplina){
 
         const {setFlashMessage} = useFlashMessage()
 
-        let msgText = 'Cadastro realizado com sucesso!'
+        let msgText = 'Disciplina cadastrada com sucesso!'
         let msgType = 'sucess'
 
         try{
-            const data = await api.post('/api/auth/students/register',user).then((response)=>{
-                return response.data
-            })
-            console.log(data)
-            } catch(error){
-                 
-                msgText = error.response.data.error
-                msgType = 'error'
-                      
-            }
-        setFlashMessage(msgText,msgType)   
-    
+            const data = await api.post('/api/disciplinas', disciplina).then((response) => {
+                return response.data;
+              });
+           
+            await authUser(data);
+            console.log(data);
+          } catch (error) {
+            msgText = error.response.data.error;
+            msgType = 'error';
+          }
+        
+          setFlashMessage(msgText, msgType);
+        }
 
-    }
+
+
+
+
     async function loginProfessor(user) {
         const { setFlashMessage } = useFlashMessage();
       
@@ -150,5 +154,5 @@ export default function useAuth(){
       
       
 
-    return {authenticated, register, login, logout,loginProfessor,loginCoordenador,authUser}
+    return {authenticated, createDisciplina, login, logout,loginProfessor,loginCoordenador}
 }

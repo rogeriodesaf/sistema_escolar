@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -9,7 +9,7 @@ import ProfessorRegister from './components/pages/Auth/ProfessorRegister';
 import Home from './components/pages/Home';
 import Profile from './components/pages/Users/Profile';
 
-
+import DisciplinaForm from './components/forms/DisciplinaForm';
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -19,25 +19,33 @@ import Message  from './components/layout/Message';
 /**CONTEXT */
 import { UserProvider } from './context/UserContext';
 import { ProfessorProvider } from './context/ProfessorContext';
+import { DisciplinaProvider } from './context/DisciplinaContext';
+import { Context } from './context/UserContext';
+import { DisciplinaContext } from './context/DisciplinaContext';
 
 
 
 function App() {
-      
+  
   return (
 
     <Router>
       <UserProvider>
-        <Navbar /> {/* Incluindo o Navbar */}
+      <Context.Consumer>
+          {({ updateUserType }) => (
+            <>
+     <Navbar userType="coordenador" /> {/* Incluindo o Navbar */}
         <Message/>
         <Container>
-      
+        <Route path="/cadastro-disciplinas">
+          <DisciplinaForm updateUserType={updateUserType} />
+        </Route>
           <Switch>
           <Route path="/home">
               <Home />
             </Route>
             <Route path="/login">
-              <Login />
+            <Login updateUserType={updateUserType} />
             </Route>
             <Route path="/register">
               <Register />
@@ -50,10 +58,14 @@ function App() {
                <ProfessorRegister />
                </Route>
            </ProfessorProvider>  
+         
            
           </Switch>
         </Container>
         <Footer /> {/* Incluindo o Footer */}
+        </>
+        )}
+        </Context.Consumer>
       </UserProvider>
     </Router>
   );

@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css'
 
+
+
 import Logo from '../../assets/img/LOGO-PARA-SITE.png'
 
 /* context */
@@ -10,7 +12,8 @@ import { Context } from '../../context/UserContext';
 
 
 const Navbar = () => {
-  const { authenticated, logout } = useContext(Context)
+  const { authenticated, logout, userType } = useContext(Context)
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
@@ -18,18 +21,33 @@ const Navbar = () => {
 
       </div>
       <ul>
-        
+
         {authenticated ? (
           <>
-          <li>
-              <Link to="/user/profile">Perfil Aluno</Link>
-            </li>
-         <li onClick={logout}>Sair</li>
+             {authenticated && userType === 'aluno' && (
+              <li>
+                <Link to="/user/profile">Perfil Aluno</Link>
+              </li>
+            )}
+           
+
+
+            {authenticated && userType === 'coordenador' && (
+             
+              <li>
+                <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
+              </li>
+              
+            )}
+             
+
+
+            <li onClick={logout}>Sair</li>
           </>
         ) : (
           <>
             <li>
-          <Link to="/login">Login</Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
               <Link to="/register">Cadastrar Aluno</Link>
