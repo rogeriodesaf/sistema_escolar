@@ -31,6 +31,7 @@ function Login() {
 // só pra testar
     if (userType === 'professor') {
      await loginProfessor(user, userType);
+     updateUserType('professor');
     } 
     else if (userType === 'coordenador'){
       await loginCoordenador(user, userType);
