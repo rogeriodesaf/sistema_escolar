@@ -24,26 +24,29 @@ const Navbar = () => {
 
         {authenticated ? (
           <>
-             {authenticated && userType === 'aluno' && (
+            {authenticated && userType === 'aluno' && (
               <li>
                 <Link to="/user/profile">Perfil Aluno</Link>
               </li>
             )}
-           
 
 
-            {authenticated && userType === 'coordenador'  &&  (
-             <>
-              <li>
-                <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
-               
-              </li>
-              <li>
-              <Link to="/disciplinas-list">Listagem de disciplinas</Link>
-            </li>
-            </>
+
+            {authenticated && userType === 'coordenador' && (
+              <>
+                <li>
+                  <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
+
+                </li>
+                <li>
+                  <Link to="/disciplinas-list">Listagem de disciplinas</Link>
+                </li>
+                <li>
+                  <Link to="/adicionar-professor-na-disciplina">Adicionar Professor à Disciplina</Link>
+                </li>
+              </>
             )}
-             
+
 
 
             <li onClick={logout}>Sair</li>

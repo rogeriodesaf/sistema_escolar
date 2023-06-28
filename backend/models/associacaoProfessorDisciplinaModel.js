@@ -13,10 +13,7 @@ const associacaoProfessorDisciplinaSchema = new mongoose.Schema({
     ref: 'Disciplina',
     required: true,
   },
-  semestre: {
-    type: String,
-    required: true,
-  },
+  
 });
 
 const AssociacaoProfessorDisciplina = mongoose.model('AssociacaoProfessorDisciplina', associacaoProfessorDisciplinaSchema);

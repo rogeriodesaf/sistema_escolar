@@ -190,7 +190,18 @@ module.exports = class ProfessorController {
     }
   };
 
+ static async listarProfessores (req, res) {
+  try {
+    // Consulte o banco de dados ou outra fonte de dados para obter a lista de professores
+    const professores = await Professor.find();
 
+    res.status(200).json(professores);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao listar os professores.' });
+  }
+
+ }
 
 };
 

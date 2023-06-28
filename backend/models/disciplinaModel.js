@@ -40,6 +40,10 @@ const disciplinaSchema = new mongoose.Schema({
       arquivo: { type: String },
       // Outros campos opcionais do material didático...
     }],
+    professores: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Professor',
+    }],
   });
   
   

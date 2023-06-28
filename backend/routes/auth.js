@@ -52,6 +52,8 @@ router.post('/professors/login', ProfessorController.login);
 router.post('/professors/register', ProfessorController.register);
 router.post('/professors/forgot-password', ProfessorController.forgotPassword);
 router.post('/professors/reset-password', ProfessorController.resetPassword);
+// Rota para listar os professores
+router.get('/professors/listar', ProfessorController.listarProfessores);
 
 // Rotas dos alunos
 router.post('/students/login', AuthController.login);

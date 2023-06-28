@@ -190,11 +190,23 @@ module.exports = class DisciplinaController {
         return res.status(404).json({ error: 'Professor não encontrado' });
       }
 
+      // Adicione o professor à disciplina
+if (!disciplina.professores) {
+  disciplina.professores = []; // Initialize as an empty array if undefined
+}
+
+
       // Adicione o ID do professor à lista de professores da disciplina
       disciplina.professores.push(professorId);
+      console.log(disciplina.professores)
+
+      // Adicione a disciplina ao professor
+    professor.disciplinas.push(disciplinaId);
 
       // Salve as alterações no banco de dados
       await disciplina.save();
+      await professor.save();
+      console.log(disciplina.professores)
 
       res.json({ message: 'Professor associado à disciplina com sucesso' });
     } catch (error) {
@@ -368,7 +380,6 @@ disciplina.presencas.push({ aluno: alunoId, presente: presente });
 
 
   // ...
-
 
 
 

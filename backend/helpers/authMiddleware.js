@@ -28,7 +28,7 @@ const authMiddleware = (req, res, next) => {
         throw new Error('Token inválido');
       }
     } catch (error) {
-      return res.status(401).json({ error: error.message });
+      return res.status(401).json({ error: "não dá assim" });
     }
   };
 
