@@ -3,7 +3,7 @@
 
 const authorizationLevels = {
     professor: ['viewStudents', 'gradeStudents','lancarNotas'],
-    coordenador: ['viewStudents', 'gradeStudents', 'manageTasks','createDisciplinas','lancarNotas','associaProfessorDisciplina'],
+    coordenador: ['viewStudents', 'gradeStudents', 'manageTasks','createDisciplinas','lancarNotas','associaProfessorDisciplina','matricularAlunos'],
     Diretor: ['viewStudents', 'gradeStudents', 'manageTasks', 'manageCourses','createDisciplinas','lancarNotas']
   };
   

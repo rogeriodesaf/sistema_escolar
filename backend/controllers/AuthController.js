@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Disciplina = require('../models/disciplinaModel');
+const authorizationLevels = require('../helpers/authorizations')
 
 
 
@@ -192,6 +193,7 @@ module.exports = class AuthController {
   static async matricularAluno(req, res) {
     const disciplinaId = req.params.disciplinaId;
 const alunoId = req.params.alunoId;
+  
 
     
     try {
@@ -212,12 +214,17 @@ const alunoId = req.params.alunoId;
         return res.status(400).json({ error: 'Aluno já está matriculado nesta disciplina' });
       }
 
-      // Matricula o aluno na disciplina
+      
+
+      const userRole = req.user.role;
+      if (authorizationLevels[userRole].includes('matricularAlunos')) {
+        // Matricula o aluno na disciplina
       user.disciplinas.push(disciplinaId);
       await user.save();
 
       res.json({ message: 'Aluno matriculado com sucesso na disciplina' });
-    } catch (error) {
+    }
+   } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Erro ao realizar a matrícula' });
     }
@@ -273,6 +280,15 @@ const alunoId = req.params.alunoId;
     }
   }
 
+  static async listarAlunos(req, res) {
+    try {
+      // Lógica para listar as disciplinas
+      const alunos = await User.find();
+      res.json(alunos);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao listar os alunos' });
+    }
+  }
 
 
 

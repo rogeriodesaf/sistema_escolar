@@ -60,6 +60,7 @@ router.post('/students/login', AuthController.login);
 router.post('/students/register', AuthController.register);
 router.post('/students/forgot-password', AuthController.forgotPassword);
 router.post('/students/reset-password', AuthController.resetPassword);
+router.get('/students/listar', AuthController.listarAlunos);
 
 // Rota para matricular um aluno em uma disciplina
 router.post('/disciplinas/:disciplinaId/alunos/:alunoId',authMiddleware, AuthController.matricularAluno);

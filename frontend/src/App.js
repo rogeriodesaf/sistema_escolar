@@ -19,6 +19,8 @@ import { DisciplinaProvider } from './context/DisciplinaContext';
 import { Context } from './context/UserContext';
 import AdicionarProfessorNaDisciplina from './components/pages/AddProfessorNaDisciplina';
 
+import AlunosList from './components/pages/Users/Profile';
+
 function App() {
   return (
     <Router>
@@ -34,8 +36,13 @@ function App() {
                     <DisciplinaForm updateUserType={updateUserType} />
                   </Route>
                   <Route path="/adicionar-professor-na-disciplina">
-                    <AdicionarProfessorNaDisciplina  />
+                    <AdicionarProfessorNaDisciplina updateUserType={updateUserType} />
                     </Route> 
+                   
+                    <Route path="/alunos-list">
+                    <AlunosList  />
+                    </Route>
+                    
                   <Route path="/disciplinas-list">
                     <DisciplineList />
                   </Route>

@@ -44,6 +44,12 @@ const Navbar = () => {
                 <li>
                   <Link to="/adicionar-professor-na-disciplina">Adicionar Professor à Disciplina</Link>
                 </li>
+                <li>
+                  <Link to="/matricular-alunos">Matricular Alunos</Link>
+                </li>
+                <li>
+                  <Link to="/alunos-list">Listagem de Alunos</Link>
+                </li>
               </>
             )}
 

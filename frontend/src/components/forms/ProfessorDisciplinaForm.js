@@ -1,5 +1,5 @@
 import React from 'react';
-import  { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import api from '../../utils/api';
 import formStyles from './Form.module.css';
 import { useHistory } from 'react-router-dom';
@@ -10,16 +10,24 @@ import styles from './Inputs.module.css'
 import selectStyles from './Select.module.css'
 
 import Input from './Input';
+import axios from 'axios';
 
 function ProfessorDisciplinaForm() {
-    const [disciplinas, setDisciplinas] = useState([]);
-    const [professores, setProfessores] = useState([]);
-    const [selectedDisciplina, setSelectedDisciplina] = useState('');
-    const [selectedProfessor, setSelectedProfessor] = useState('');
+
+  const [token] = useState(localStorage.getItem('token') || '')
+
+
+
+
+
+  const [disciplinas, setDisciplinas] = useState([]);
+  const [professores, setProfessores] = useState([]);
+  const [selectedDisciplina, setSelectedDisciplina] = useState('');
+  const [selectedProfessor, setSelectedProfessor] = useState('');
 
 
   const { setFlashMessage } = useFlashMessage();
-  const [token] = useState(localStorage.getItem('token') || '')
+ 
   const { authenticated } = useContext(Context);
 
   const [dados, setDados] = useState({
@@ -28,7 +36,7 @@ function ProfessorDisciplinaForm() {
   });
 
   const history = useHistory();
-  
+
 
   useEffect(() => {
     // Carrega a lista de disciplinas e professores do backend
@@ -56,7 +64,7 @@ function ProfessorDisciplinaForm() {
     }
   }
 
- const handleDisciplinaChange = (event) => {
+  const handleDisciplinaChange = (event) => {
     setSelectedDisciplina(event.target.value);
   };
 
@@ -66,44 +74,64 @@ function ProfessorDisciplinaForm() {
 
   const handleAssociarClick = async (event) => {
     event.preventDefault();
-    try {
-
-    const data = await api.post(
-  `/api/disciplinas/${selectedDisciplina}/professoresprofessors/${selectedProfessor }`);
-  // Atualiza a lista de disciplinas após a associação
-      fetchDisciplinas();
-    } catch (error) {
-      console.error(error);
+    if (!authenticated) {
+      setFlashMessage('Você precisa estar autenticado para cadastrar uma disciplina');
+      return;
     }
+    let msgType = 'success'
+      
+  
+      const disciplinaId = selectedDisciplina;
+      const professorId = selectedProfessor;
+  
+      
+      // Faça a requisição POST para associar o professor à disciplina
+      const data  = await api.post(`/api/disciplinas/${disciplinaId}/professores/${professorId}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+      
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+        return response.data
+      })
+      .catch((err) => {
+        console.log(err)
+        msgType = 'error'
+        return err.response.data
+      })
+      setFlashMessage(data.message, msgType)
+    history.push('/home')
   };
   return (
     <div className={styles.form_control}>
-<form onSubmit={handleAssociarClick} className={formStyles.form_container}>
-<div className={formStyles.form_control}>
-    <h2>Disciplinas</h2>
+      <form onSubmit={handleAssociarClick} className={formStyles.form_container}>
+        <div className={formStyles.form_control}>
+          <h2>Disciplinas</h2>
 
 
 
-    
-   <select  className= {selectStyles.form_control} value={selectedDisciplina} onChange={handleDisciplinaChange}>
-      <option value="">Selecione uma disciplina</option>
-      {disciplinas.map((disciplina) => (
-        <option key={disciplina._id} value={disciplina._id}>{disciplina.nome}</option>
-      ))}
-    </select>
-    <select className= {selectStyles.form_control}  value={selectedProfessor} onChange={handleProfessorChange}>
-      <option value="">Selecione um professor</option>
-      {professores.map((professor) => (
-        <option key={professor._id} value={professor._id}>{professor.name}</option>
-      ))}
-      </select> 
-      <input type='submit' value= 'Associar'/>
-  </div>
+
+          <select className={selectStyles.form_control} value={selectedDisciplina} onChange={handleDisciplinaChange}>
+            <option value="">Selecione uma disciplina</option>
+            {disciplinas.map((disciplina) => (
+              <option key={disciplina._id} value={disciplina._id}>{disciplina.nome}</option>
+            ))}
+          </select>
+          <select className={selectStyles.form_control} value={selectedProfessor} onChange={handleProfessorChange}>
+            <option value="">Selecione um professor</option>
+            {professores.map((professor) => (
+              <option key={professor._id} value={professor._id}>{professor.name}</option>
+            ))}
+          </select>
+          <input type='submit' value='Associar' />
+        </div>
 
 
-</form>
-</div>
-);}
- 
- export default ProfessorDisciplinaForm;
- 
+      </form>
+    </div>
+  );
+}
+
+export default ProfessorDisciplinaForm;

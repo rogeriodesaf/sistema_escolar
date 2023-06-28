@@ -26,7 +26,7 @@ router.put('/:id', authMiddleware, DisciplinaController.updateDisciplina);
 router.delete('/:id', authMiddleware, DisciplinaController.deleteDisciplina);
 
 // Rota para associar um professor a uma disciplina
-router.post('/:disciplinaId/professores/:professorId', authMiddleware, DisciplinaController.associarProfessorDisciplina);
+router.post('/:disciplinaId/professores/:professorId', DisciplinaController.associarProfessorDisciplina);
 
 // Rota para remover um professor de uma disciplina
 router.delete('/:disciplinaId/professores/:professorId',authMiddleware, DisciplinaController.removerProfessorDisciplina);
