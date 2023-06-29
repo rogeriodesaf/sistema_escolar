@@ -75,7 +75,7 @@ module.exports = class AuthController {
       }
       
       // Gerar o token JWT
-      const token = jwt.sign({ userId: user._id }, 'seuSegredoAqui', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user._id ,role: user.role}, 'seuSegredoAqui', { expiresIn: '1h' });
       // Retornar o token JWT junto com a resposta de sucesso
       res.json({ message: 'Login bem-sucedido', token });
     }
@@ -216,15 +216,15 @@ const alunoId = req.params.alunoId;
 
       
 
-      const userRole = req.user.role;
-      if (authorizationLevels[userRole].includes('matricularAlunos')) {
+     // const userRole = req.user.role;
+     
         // Matricula o aluno na disciplina
       user.disciplinas.push(disciplinaId);
       await user.save();
 
       res.json({ message: 'Aluno matriculado com sucesso na disciplina' });
     }
-   } catch (error) {
+    catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Erro ao realizar a matrícula' });
     }
