@@ -2,6 +2,8 @@ const Professor = require('../models/Professor');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authorizationLevels = require('../helpers/authorizations');
+const Disciplina = require('../models/disciplinaModel')
+const User = require('../models/Users')
 
 
 // Função para registrar um professor
@@ -203,7 +205,31 @@ module.exports = class ProfessorController {
 
  }
 
+ static async listarDisciplinasProfessor(req, res) {
+  try {
+    const { professorId } = req.params;
+
+    // Verifique se o professor existe
+    const professor = await Professor.findById(professorId);
+
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor não encontrado' });
+    }
+
+    // Obtenha as disciplinas associadas ao professor
+    const disciplinas = await Disciplina.find({ _id: { $in: professor.disciplinas } });
+
+    res.json(disciplinas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao listar as disciplinas do professor' });
+  }
+}
+
+
 };
+
+
 
 
 

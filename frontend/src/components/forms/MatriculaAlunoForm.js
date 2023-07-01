@@ -113,7 +113,7 @@ function AlunoDisciplinaForm() {
     <div className={styles.form_control}>
       <form onSubmit={handleAssociarClick} className={formStyles.form_container}>
         <div className={formStyles.form_control}>
-          <h2>Disciplinas</h2>
+          <h2>Matricula</h2>
 
 
 

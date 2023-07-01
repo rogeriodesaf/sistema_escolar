@@ -31,7 +31,7 @@ const authMiddleware = (req, res, next) => {
         console.log('não entrou no try')
         // A propriedade 'role' não está presente no token
         throw new Error('Token inválido');
-      }   console.log('não entrou no try 2', decoded ) 
+      }   console.log('não entrou no try 2', decoded.userId ) 
     } catch (error) {
       console.log('não entrou no try 3', token ) 
       return res.status(401).json({ error: "não dá assim" });
