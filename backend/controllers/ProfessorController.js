@@ -208,7 +208,7 @@ module.exports = class ProfessorController {
  static async listarDisciplinasProfessor(req, res) {
   try {
     const { professorId } = req.params;
-
+     console.log()
     // Verifique se o professor existe
     const professor = await Professor.findById(professorId);
 

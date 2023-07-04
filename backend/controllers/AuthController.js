@@ -191,44 +191,41 @@ module.exports = class AuthController {
 
   };
   static async matricularAluno(req, res) {
-    const disciplinaId = req.params.disciplinaId;
-const alunoId = req.params.alunoId;
+    const { disciplinaId, alunoId } = req.params;
   
-
-    
     try {
       // Verifica se o aluno existe
       const user = await User.findById(alunoId);
       if (!user) {
         return res.status(404).json({ error: 'Aluno não encontrado' });
       }
-
+  
       // Verifica se a disciplina existe
       const disciplina = await Disciplina.findById(disciplinaId);
       if (!disciplina) {
         return res.status(404).json({ error: 'Disciplina não encontrada' });
       }
-
+  
       // Verifica se o aluno já está matriculado na disciplina
       if (user.disciplinas.includes(disciplinaId)) {
         return res.status(400).json({ error: 'Aluno já está matriculado nesta disciplina' });
       }
-
-      
-
-     // const userRole = req.user.role;
-     
-        // Matricula o aluno na disciplina
+  
+      // Matricula o aluno na disciplina
       user.disciplinas.push(disciplinaId);
       await user.save();
-
+  
+      // Adiciona o aluno na disciplina
+      disciplina.alunos.push(alunoId);
+      await disciplina.save();
+  
       res.json({ message: 'Aluno matriculado com sucesso na disciplina' });
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Erro ao realizar a matrícula' });
     }
   };
+  
   static async desmatricularAluno(req, res) {
     const { disciplinaId, alunoId } = req.params;
   
@@ -290,6 +287,25 @@ const alunoId = req.params.alunoId;
     }
   }
 
+  static async alunosMatriculadosEmUmaDisciplina(req, res) {
+    try {
+      const { disciplinaId } = req.params;
+  
+      // Verifica se a disciplina existe
+      const disciplina = await Disciplina.findById(disciplinaId).populate('alunos');
+      if (!disciplina) {
+        return res.status(404).json({ error: 'Disciplina não encontrada' });
+      }
+  
+      // Retorna a lista de alunos matriculados na disciplina
+      res.json({ alunos: disciplina.alunos });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao obter a lista de alunos matriculados na disciplina' });
+    }
+  }
+  
+  
 
 
 };

@@ -17,6 +17,10 @@ const disciplinaSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  alunos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
 
     // outras propriedades da disciplina...
     presencas: {

@@ -65,10 +65,14 @@ router.post('/students/reset-password', AuthController.resetPassword);
 router.get('/students/listar', AuthController.listarAlunos);
 
 // Rota para matricular um aluno em uma disciplina
-router.post('/disciplinas/:disciplinaId/alunos/:alunoId',authMiddleware, AuthController.matricularAluno);
+router.post('/disciplinas/:disciplinaId/alunos/:alunoId',AuthController.matricularAluno);
 // Rota para desmatricular um aluno de uma disciplina
 router.delete('/disciplinas/:disciplinaId/alunos/:alunoId',authMiddleware, AuthController.desmatricularAluno);
+//router.get('/alunos/:alunoId/disciplinas', AuthController.listarDisciplinasMatriculadas);
+
 router.get('/alunos/:alunoId/disciplinas', AuthController.listarDisciplinasMatriculadas);
+//listar alunos matriculados em uma determinada disciplina
+router.get('/disciplinas/:disciplinaId/alunos', AuthController.alunosMatriculadosEmUmaDisciplina);
 
 
 

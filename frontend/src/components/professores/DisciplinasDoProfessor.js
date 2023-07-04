@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import api from '../../utils/api';
 import useFlashMessage from '../../hooks/useFlashMessage'
+import { Link } from 'react-router-dom';
+
+
 
 function ProfessorDisciplinas() {
   const [disciplinas, setDisciplinas] = useState([]);
@@ -32,6 +35,8 @@ function ProfessorDisciplinas() {
 
   
 
+  
+
   return (
     <div>
       <h2>Disciplinas do Professor</h2>
@@ -41,7 +46,10 @@ function ProfessorDisciplinas() {
         <ul>
           {disciplinas.map((disciplina) => (
             <li key={disciplina._id}>
-              <h3>{disciplina.nome}</h3>
+           <h3>
+           <Link to={`/disciplinas/${disciplina._id}/alunos`}>{disciplina.nome}</Link>
+           </h3>
+
               <p>{disciplina.descricao}</p>
               <p>Créditos: {disciplina.creditos}</p>
               <p>Carga Horária: {disciplina.cargaHoraria}</p>
