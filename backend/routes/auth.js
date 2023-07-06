@@ -81,6 +81,8 @@ router.get('/disciplinas/:disciplinaId/alunos', AuthController.alunosMatriculado
 
 
 
+
+
 // Outras rotas de autenticação...
 
 // Rota para adicionar um professor a uma disciplina

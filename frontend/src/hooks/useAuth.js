@@ -18,7 +18,7 @@ export default function useAuth() {
 
   async function register(user) {
     let msgText = 'Cadastro realizado com sucesso!';
-    let msgType = 'success';
+    let msgType = 'sucess';
 
     try {
       const data = await api.post('/api/auth/students/register', user).then((response) => {
@@ -53,7 +53,7 @@ export default function useAuth() {
 
   async function loginCoordenador(user) {
     let msgText = 'Login realizado com sucesso!';
-    let msgType = 'success';
+    let msgType = 'sucess';
 
     try {
       const data = await api.post('/api/auth/coordenador/login', user).then((response) => {
@@ -72,7 +72,7 @@ export default function useAuth() {
 
   async function login(user, userType) {
     let msgText = 'Login realizado com sucesso!';
-    let msgType = 'success';
+    let msgType = 'sucess';
 
     let data;
 
@@ -103,7 +103,7 @@ export default function useAuth() {
 
   async function logout() {
     let msgText = 'Logout realizado com sucesso!';
-    let msgType = 'success';
+    let msgType = 'sucess';
 
     setAuthenticated(false);
     localStorage.removeItem('token');

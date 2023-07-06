@@ -36,9 +36,8 @@ const Navbar = () => {
               <li>
                 <Link to="/disciplinas/professor">Suas turmas</Link>
               </li>
-               <li>
-               <Link to="/disciplinas/alunos">Sua turma</Link>
-             </li>
+               
+           
              </>
             )}
 

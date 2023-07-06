@@ -266,6 +266,7 @@ desestruturamos as propriedades alunoId e presente usando a sintaxe de desestrut
      // Inicializar contadores
 let totalPresente = 0;
 let totalAusente = 0;
+let ausenciaAluno = 0;
       const presencasArray = [];
       // Percorrer o array de presenças recebido
       for (const presenca of presencas) {
@@ -306,12 +307,14 @@ disciplina.presencas.push({ aluno: alunoId, presente: presente });
       
 
      const totalPresencas = presencas
+     //const presencasFaltas = false
      const presencasFaltas = presencas.filter(presenca => presenca.presente === false);
 
      // Exibir os IDs dos registros com presente = false
      for (const presenca of disciplina.presencas) {
-      if(presenca.presente === false){
+      if(presenca.presente === false ){
         totalAusente++
+       
        // console.log(presenca.presente);
       } else{
         totalPresente++
@@ -322,6 +325,7 @@ disciplina.presencas.push({ aluno: alunoId, presente: presente });
 
     console.log('total presenças: ',totalPresente);
     console.log('total ausencias: ',totalAusente);
+    
 
 
       return res.status(200).json({ message: `total de presenças: ${totalPresente} , total de ausÊncias:  ${totalAusente}` });
@@ -371,7 +375,36 @@ disciplina.presencas.push({ aluno: alunoId, presente: presente });
     }
   }
   
-  
+ // Função para registrar uma nova aula em uma disciplina
+static async registrarAula(req, res) {
+  try {
+    const { disciplinaId } = req.params;
+    const { assunto, data } = req.body;
+
+    // Verifique se a disciplina existe
+    const disciplina = await Disciplina.findById(disciplinaId);
+    if (!disciplina) {
+      return res.status(404).json({ error: 'Disciplina não encontrada' });
+    }
+
+    // Crie um novo objeto de aula com as informações fornecidas
+    const novaAula = {
+      assunto,
+      data,
+    };
+
+    // Adicione a nova aula à lista de aulas da disciplina
+    disciplina.aulas.push(novaAula);
+
+    // Salve as alterações na disciplina
+    await disciplina.save();
+
+    res.json({ message: 'Aula registrada com sucesso' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao registrar a aula' });
+  }
+} 
 
 
 }

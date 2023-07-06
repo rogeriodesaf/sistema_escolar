@@ -32,10 +32,14 @@ router.post('/:disciplinaId/professores/:professorId', DisciplinaController.asso
 router.delete('/:disciplinaId/professores/:professorId',authMiddleware, DisciplinaController.removerProfessorDisciplina);
 
 // rota correspondente para o lançamento de presenças:
-router.post('/:disciplinaId/presencas', authMiddleware, DisciplinaController.lancarPresenca);
+router.post('/:disciplinaId/presencas',  DisciplinaController.lancarPresenca);
 
 // rota correspondente para remover faltas:
 router.delete('/:disciplinaId/faltas/:presencaId/aluno/:alunoId', authMiddleware, DisciplinaController.removerFalta);
+
+
+// Rota para registrar uma nova aula em uma disciplina
+router.post('/disciplinas/:disciplinaId/aulas', DisciplinaController.registrarAula);
 
 
 module.exports = router;

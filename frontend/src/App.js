@@ -15,14 +15,14 @@ import Container from './components/layout/Container';
 import Message from './components/layout/Message';
 import { UserProvider } from './context/UserContext';
 import { ProfessorProvider } from './context/ProfessorContext';
-import { DisciplinaProvider } from './context/DisciplinaContext';
+import { DisciplinaProvider , DisciplinaContext} from './context/DisciplinaContext';
 import { Context } from './context/UserContext';
 import AdicionarProfessorNaDisciplina from './components/pages/AddProfessorNaDisciplina';
 import AlunoDisciplinaForm from './components/forms/MatriculaAlunoForm';
 import DisciplinasDoProfessor from './components/professores/DisciplinasDoProfessor';
-import listarAlunosMatriculadosNaDisciplina from './components/pages/Disciplinas/AlunosMatriculadosNaDisciplina';
+import AlunosMatriculados from './components/pages/Disciplinas/AlunosMatriculadosNaDisciplina';
 
-import AlunosList from './components/pages/Users/Profile';
+import RegistrarAula from './components/professores/RegistrarAula';
 
 function App() {
   return (
@@ -30,8 +30,14 @@ function App() {
       <UserProvider>
         <Context.Consumer>
           {({ authenticated, userType, updateUserType }) => (
-            <>
-              <Navbar authenticated={authenticated} userType={userType} />
+             <DisciplinaProvider>
+              {/* Use o contexto da disciplina para acessar o ID da disciplina */}
+              <DisciplinaContext.Consumer>
+              {({ disciplinaId }) => (
+                <>
+                  <Navbar authenticated={authenticated} userType={userType} disciplinaId={disciplinaId} />
+           
+             
               <Message />
               <Container>
                 <Switch>
@@ -40,15 +46,15 @@ function App() {
                   </Route>
                   <Route path="/adicionar-professor-na-disciplina">
                     <AdicionarProfessorNaDisciplina updateUserType={updateUserType} />
-                    </Route> 
-                    <Route path="/matricular-alunos">
+                  </Route>
+                  <Route path="/matricular-alunos">
                     <AlunoDisciplinaForm updateUserType={updateUserType} />
-                    </Route> 
-                   
-                    <Route path="/alunos-list">
-                    <AlunosList  />
-                    </Route>
-                    
+                  </Route>
+
+                  <Route path="/alunos-list">
+                    <Profile />
+                  </Route>
+
                   <Route path="/disciplinas-list">
                     <DisciplineList />
                   </Route>
@@ -65,22 +71,29 @@ function App() {
                     <Profile />
                   </Route>
                   <Route path="/disciplinas/professor">
-                    <DisciplinasDoProfessor/>
+                    <DisciplinasDoProfessor />
                   </Route>
-                  <Route path="/disciplinas/:disciplinaId/alunos" component={listarAlunosMatriculadosNaDisciplina} />
-                  
+                  <Route path="/disciplinas/:disciplinaId" component={AlunosMatriculados} />
+
+              
+
+
                   <ProfessorProvider>
                     <Route path="/professor/register">
                       <ProfessorRegister />
                     </Route>
-                    
+
                   </ProfessorProvider>
-                 
+
                 </Switch>
               </Container>
               <Footer />
             </>
+            )}
+            </DisciplinaContext.Consumer>
+            </DisciplinaProvider>
           )}
+          
         </Context.Consumer>
       </UserProvider>
     </Router>

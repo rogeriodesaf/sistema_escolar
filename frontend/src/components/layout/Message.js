@@ -19,7 +19,7 @@ function Message(){
 
             setTimeout(()=>{
                 setVisibility(false)
-            },50000)
+            },3000)
         })
 
     }, [])

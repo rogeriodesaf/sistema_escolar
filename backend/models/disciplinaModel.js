@@ -38,6 +38,16 @@ const disciplinaSchema = new mongoose.Schema({
       ],
       default: [],
     },
+    aulas: [{
+      assunto: {
+        type: String,
+        required: true,
+      },
+      data: {
+        type: Date,
+        required: true,
+      },
+}],
     materiaisDidaticos: [{
       nome: { type: String },
       descricao: { type: String },

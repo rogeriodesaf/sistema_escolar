@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import RegistrarAula from '../../professores/RegistrarAula';
+import Message from '../../layout/Message';
+import useFlashMessage from '../../../hooks/useFlashMessage';
+
+import styles from './AlunosMatriculadosNaDisciplina.module.css';
 
 const AlunosMatriculados = () => {
   const { disciplinaId } = useParams();
   const [alunos, setAlunos] = useState([]);
+  const [mostrarLista, setMostrarLista] = useState(true);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const { setFlashMessage } = useFlashMessage();
 
   useEffect(() => {
-    // Aqui você pode fazer uma requisição para obter a lista de alunos matriculados na disciplina
-    // Pode ser usando fetch, axios ou a biblioteca que preferir
-    // Atualize o estado dos alunos com os dados obtidos da requisição
-
-    // Exemplo:
     const fetchAlunosMatriculados = async () => {
       try {
-        console.log(disciplinaId)
         const response = await fetch(`http://localhost:5000/api/auth/disciplinas/${disciplinaId}/alunos`);
         const data = await response.json();
         setAlunos(data.alunos);
-        console.log("data: ", alunos)
       } catch (error) {
         console.error(error);
       }
@@ -26,48 +27,53 @@ const AlunosMatriculados = () => {
     fetchAlunosMatriculados();
   }, [disciplinaId]);
 
-
-  const registrarAulas = async () => {
-    try {
-      // Fazer a requisição para registrar as aulas e fazer a chamada dos alunos
-      // Pode ser utilizando fetch ou axios
-      // Atualize o estado ou faça qualquer tratamento necessário com a resposta da API
-      // Exemplo utilizando fetch:
-      const response = await fetch(`http://localhost:5000/api/auth/disciplinas/${disciplinaId}/registrar-aulas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Pode enviar qualquer dado adicional na requisição, se necessário
-      });
-      const data = await response.json();
-      console.log(data); // Exemplo de tratamento da resposta da API
-  
-      // Atualize o estado ou faça qualquer ação necessária com base na resposta da API
-    } catch (error) {
-      console.error(error);
-    }
+  const handleClickRegistrarAulas = () => {
+    setMostrarFormulario(true);
+    setMostrarLista(false);
   };
-  
+
+  const handleFlashMessage = (type, message) => {
+    setFlashMessage(type, message);
+  };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>Alunos Matriculados na Disciplina</h2>
-      {alunos.length === 0 ? (
-        <p>Nenhum aluno matriculado nesta sssssssssssdisciplina.</p>
-      ) : (
-        <ul>
-          {alunos.map((aluno) => (
-            <li key={aluno._id}>
-              <h3>{aluno.firstName+' ' +aluno.lastName}</h3>
-              {/* Renderize outras informações relevantes do aluno, se necessário */}
-            </li>
-          ))}
-        </ul>
-      )}
-    
-<button onClick={registrarAulas}>Registrar Aulas</button>
+      {mostrarLista ? (
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+            </tr>
+          </thead>
+          <tbody>
+            {alunos.map((aluno) => (
+              <tr key={aluno._id}>
+                <td>{aluno.firstName}</td>
+                <td>{aluno.lastName}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
 
+      {mostrarLista && alunos.length === 0 && <p>Nenhum aluno matriculado nesta disciplina.</p>}
+
+      {mostrarFormulario ? (
+        <RegistrarAula
+          disciplinaId={disciplinaId}
+         // handleFlashMessage={handleFlashMessage} // Passe a função handleFlashMessage para o componente RegistrarAula
+        />
+      ) : (
+        <button className={styles.registrarAulasBtn} onClick={handleClickRegistrarAulas}>
+          Clique aqui para registrar a aula de hoje!
+        </button>
+      )}
+
+     {/* <div className={styles.flashMessage}>
+        <Message /> 
+      </div> */}
     </div>
   );
 };
