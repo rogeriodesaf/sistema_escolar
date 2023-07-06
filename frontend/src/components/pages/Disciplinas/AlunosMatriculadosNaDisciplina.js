@@ -38,9 +38,11 @@ const AlunosMatriculados = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Alunos Matriculados na Disciplina</h2>
-      {mostrarLista ? (
+      <h1>Bem vindo ao seu ambiente professor(a)</h1>
+      {mostrarLista   ? (
         <table className={styles.table}>
+        
+
           <thead>
             <tr>
               <th>Nome</th>

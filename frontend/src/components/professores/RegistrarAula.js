@@ -132,28 +132,28 @@ function RegistrarAula({ disciplinaId }) {
         </div>
 
         <div className={styles.formField}>
-          <h2 className={styles.formLabel}>Presenças:</h2>
+          <h1 className={styles.formTitle}>Chamada:</h1>
           {alunos.map((aluno) => (
-            <div key={aluno._id} className={styles.presencaItem}>
-              <span>{aluno.firstName}:</span>
-              <div className={styles.presencaButtonContainer}>
-               <label>
-  <input
-    type="checkbox"
-    checked={presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
-    onChange={(e) => handlePresencaChange(aluno._id, e.target.checked)}
-  />
-  Presente
-</label>
+            <div key={aluno._id} style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ marginRight: '10px' ,fontWeight:'bold',borderBottom: '1px solid #ddd'}}>{aluno.firstName}:</span>
+             // <div className={styles.presencaButtonContainer}>
+                <label style={{ marginLeft: '10px' }}>
+                  <input className={styles.checkbox}
+                    type="checkbox"
+                    checked={presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
+                    onChange={(e) => handlePresencaChange(aluno._id, e.target.checked)}
+                  />
+                  Presente
+                </label>
 
 
-                <label>
-                <input
-  type="checkbox"
-  checked={!presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
-  onChange={(e) => handlePresencaChange(aluno._id, !e.target.checked)}
-/>
-Falta
+                <label style={{ marginLeft: '10px' }}>
+                  <input
+                    type="checkbox"
+                    checked={!presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
+                    onChange={(e) => handlePresencaChange(aluno._id, !e.target.checked)}
+                  />
+                  Falta
 
                 </label>
               </div>
