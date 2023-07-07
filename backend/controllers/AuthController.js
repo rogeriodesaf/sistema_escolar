@@ -305,8 +305,65 @@ module.exports = class AuthController {
     }
   }
   
+  static async contadorPresencas(req, res) {
+    try {
+      const { alunoId, disciplinaId } = req.params;
   
+      // Verifica se a disciplina existe
+      const disciplina = await Disciplina.findById(disciplinaId);
+      if (!disciplina) {
+        return res.status(404).json({ error: 'Disciplina não encontrada' });
+      }
+  
+      // Verifica se o aluno existe
+      const aluno = await User.findById(alunoId);
+      if (!aluno) {
+        return res.status(404).json({ error: 'Aluno não encontrado' });
+      }
 
+ 
+  
+     
+      // Filtra as presenças do aluno na disciplina
+      let contadorPresencas = 0;
+      let contadorFaltas = 0;
+
+      console.log('alunoId:', alunoId); // Verificação do valor de alunoId
+      
+      for (let i = 0; i < disciplina.presencas.length; i++) {
+        const presenca = disciplina.presencas[i];
+        
+        
+        if (presenca.aluno.toString() === alunoId) {
+          if (presenca.presente === true) {
+           
+            contadorPresencas++;
+          } else {
+            
+            contadorFaltas++;
+          }
+            // Adiciona a condição de saída do loop
+    if (contadorPresencas + contadorFaltas === disciplina.presencas.length) {
+      break;
+        }
+     
+      }
+    
+    }
+      
+      console.log('contadorPresencas:', contadorPresencas); // Verificação do valor final do contador
+      console.log('contadorFaltas:', contadorFaltas); 
+  
+      // Conta a quantidade de presenças
+      //const quantidadePresencas = presencasAluno.length;
+
+      return res.json({ contadorPresencas , contadorFaltas });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Ocorreu um erro ao contar as presenças' });
+    }
+  }
+  
 
 };
 

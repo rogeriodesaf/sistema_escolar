@@ -74,6 +74,7 @@ router.get('/alunos/:alunoId/disciplinas', AuthController.listarDisciplinasMatri
 //listar alunos matriculados em uma determinada disciplina
 router.get('/disciplinas/:disciplinaId/alunos', AuthController.alunosMatriculadosEmUmaDisciplina);
 
+router.get('/alunos/:alunoId/disciplinas/:disciplinaId/presencas',AuthController.contadorPresencas);
 
 
 

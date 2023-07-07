@@ -23,6 +23,7 @@ import DisciplinasDoProfessor from './components/professores/DisciplinasDoProfes
 import AlunosMatriculados from './components/pages/Disciplinas/AlunosMatriculadosNaDisciplina';
 
 import RegistrarAula from './components/professores/RegistrarAula';
+import PresencasFaltas from '../src/components/alunos/PresencasFaltas'
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
                     <Route path="/professor/register">
                       <ProfessorRegister />
                     </Route>
+                    <Route path="/disciplinas/:disciplinaId" component={PresencasFaltas} />
 
                   </ProfessorProvider>
 
