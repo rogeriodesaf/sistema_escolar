@@ -7,6 +7,8 @@ import bus from '../../utils/bus';
 import styles from './RegistrarAula.module.css';
 
 function RegistrarAula({ disciplinaId }) {
+  const [aulaRegistrada, setAulaRegistrada] = useState(false);
+
   const [presencasAluno, setPresencasAluno] = useState([]);
 
   const [assunto, setAssunto] = useState('');
@@ -36,8 +38,8 @@ function RegistrarAula({ disciplinaId }) {
       presencas: presencasAluno,
     };
 
-    let msgText;
-    let msgType = 'success';
+       let msgText = 'Cadastro realizado com sucesso!';
+    let msgType = 'sucess';
 
     fetch(`http://localhost:5000/api/disciplinas/disciplinas/${disciplinaId}/aulas`, {
       method: 'POST',
@@ -46,15 +48,25 @@ function RegistrarAula({ disciplinaId }) {
       },
       body: JSON.stringify(novaAula),
     })
-      .then((response) => response.json())
+    .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        setFlashMessage(msgText, msgType);
+       // setFlashMessage(msgText, msgType);
+        setAulaRegistrada(true); // Definimos que a aula foi registrada
+        setAssunto(''); // Limpar o campo de assunto
+        setData(''); // Limpar o campo de data
+        setPresencasAluno([]); // Limpar o estado de presenças dos alunos
       })
+      //.then((response) => response.json())
+     // .then((data) => {
+      //  console.log(data.message);
+       /// setFlashMessage(msgText, msgType);
+    //  })
       .catch((error) => {
         console.error(error);
         setFlashMessage('error', 'Ocorreu um erro ao registrar a aula.');
       });
+      setFlashMessage(msgText, msgType);
   };
 
   const handlePresencaChange = (alunoId, presente) => {
