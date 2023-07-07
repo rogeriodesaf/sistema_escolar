@@ -330,26 +330,18 @@ module.exports = class AuthController {
 
       console.log('alunoId:', alunoId); // Verificação do valor de alunoId
       
-      for (let i = 0; i < disciplina.presencas.length; i++) {
-        const presenca = disciplina.presencas[i];
-        
-        
-        if (presenca.aluno.toString() === alunoId) {
-          if (presenca.presente === true) {
-           
-            contadorPresencas++;
-          } else {
-            
-            contadorFaltas++;
-          }
-            // Adiciona a condição de saída do loop
-    if (contadorPresencas + contadorFaltas === disciplina.presencas.length) {
-      break;
-        }
-     
-      }
-    
+   for (let i = 0; i < disciplina.presencas.length; i++) {
+  const presenca = disciplina.presencas[i];
+
+  if (presenca.aluno.toString() === alunoId.toString()) {
+    if (presenca.presente === true) {
+      contadorPresencas++;
+    } else {
+      contadorFaltas++;
     }
+  }
+}
+
       
       console.log('contadorPresencas:', contadorPresencas); // Verificação do valor final do contador
       console.log('contadorFaltas:', contadorFaltas); 

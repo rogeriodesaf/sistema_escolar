@@ -131,37 +131,40 @@ function RegistrarAula({ disciplinaId }) {
           />
         </div>
 
-        <div className={styles.formField}>
-          <h1 className={styles.formTitle}>Chamada:</h1>
-          {alunos.map((aluno) => (
-            <div key={aluno._id} style={{ display: 'flex', alignItems: 'center' }}>
-              <span style={{ marginRight: '10px' ,fontWeight:'bold',borderBottom: '1px solid #ddd'}}>{aluno.firstName}:</span>
-             // <div className={styles.presencaButtonContainer}>
-                <label style={{ marginLeft: '10px' }}>
-                  <input className={styles.checkbox}
-                    type="checkbox"
-                    checked={presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
-                    onChange={(e) => handlePresencaChange(aluno._id, e.target.checked)}
-                  />
-                  Presente
-                </label>
-
-
-                <label style={{ marginLeft: '10px' }}>
-                  <input
-                    type="checkbox"
-                    checked={!presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
-                    onChange={(e) => handlePresencaChange(aluno._id, !e.target.checked)}
-                  />
-                  Falta
-
-                </label>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.formSubmit}>
+        <h1 className={styles.formTitle}> Frequência</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Aluno</th>
+          <th>Presença</th>
+          <th>Falta</th>
+        </tr>
+      </thead>
+      <tbody>
+        {alunos.map((aluno) => (
+          <tr key={aluno._id}>
+            <td>
+              {aluno.firstName} {aluno.lastName}
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                checked={presencasAluno.some((presenca) => presenca.alunoId === aluno._id && presenca.presente)}
+                onChange={(e) => handlePresencaChange(aluno._id, e.target.checked)}
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                checked={presencasAluno.some((presenca) => presenca.alunoId === aluno._id && !presenca.presente)}
+                onChange={(e) => handlePresencaChange(aluno._id, !e.target.checked)}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+      <div className={styles.formSubmit}>
           <button type="submit" className={styles.formButton} onClick={salvarPresencas}>
             Registrar Aula
           </button>
@@ -172,3 +175,4 @@ function RegistrarAula({ disciplinaId }) {
 }
 
 export default RegistrarAula;
+       
