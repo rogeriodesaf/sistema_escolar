@@ -8,26 +8,29 @@ module.exports = class NotaController {
   static async criarNota (req, res) {
     try {
       // Extrair os dados da requisição
-      const { aluno, disciplina, nota } = req.body;
-
+      const { nota } = req.body;
+      const { disciplinaId, alunoId} = req.params;
+      console.log('disciplinaId: ',disciplinaId,'alunoId :',alunoId)
       // Verifique se o usuário possui permissão para lançar notas
-      const userRole = req.user.role;
-      if (authorizationLevels[userRole].includes('lancarNotas')) {
+      //const userRole = req.user.role;
+      //if (authorizationLevels[userRole].includes('lancarNotas')) {
         const novaNota = new Nota({
-          aluno,
-          disciplina,
+          aluno: alunoId,
+          disciplina: disciplinaId ,
           nota,
-          responsavel: req.user._id,
+         // responsavel: req.user._id,
           
         })
+        console.log('novaNota', novaNota)
 
-      // Criar uma nova nota no banco de dados
+      //Criar uma nova nota no banco de dados
       await novaNota.save();
 
       res.status(201).json({ message: 'nota lançada com sucesso' });
-    } else {
-        res.status(403).json({ error: 'Acesso não autorizado' });
-      }
+  //} 
+   //else {
+       
+      //}
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Erro ao criar nota.' });

@@ -31,5 +31,23 @@
 }
 
 .registrarAulasBtn:hover {
-  background-color: #2980b9;
+  background-color: #052337;
+  color: #fff;
+}
+
+.breakText {
+  word-break: break-all;
+}
+
+.buttonContainer {
+  white-space: nowrap;
+}
+
+.registrarAulasBtn {
+  display: inline-block;
+  margin-right: 10px; /* Espaçamento entre os botões */
+}
+
+.buttonText {
+  word-break: break-word;
 }

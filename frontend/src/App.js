@@ -25,6 +25,8 @@ import AlunosMatriculados from './components/pages/Disciplinas/AlunosMatriculado
 import RegistrarAula from './components/professores/RegistrarAula';
 import PresencasFaltas from '../src/components/alunos/PresencasFaltas'
 
+import LancarNotas from './components/professores/LancarNotas'
+
 function App() {
   return (
     <Router>
@@ -77,7 +79,7 @@ function App() {
                   <Route path="/disciplinas/:disciplinaId" component={AlunosMatriculados} />
 
               
-
+                  <Route path="/lancar-nota" component={LancarNotas} />
 
                   <ProfessorProvider>
                     <Route path="/professor/register">

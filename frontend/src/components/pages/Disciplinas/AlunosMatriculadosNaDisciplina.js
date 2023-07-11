@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import RegistrarAula from '../../professores/RegistrarAula'
 import useFlashMessage from '../../../hooks/useFlashMessage';
+import { Link } from 'react-router-dom'
+import LancarNotas from '../../professores/LancarNotas'
 
 import styles from './AlunosMatriculadosNaDisciplina.module.css';
 
 const AlunosMatriculados = () => {
-  const [mostrarH1,setMostrarH1] = useState(true)
+
+  const [mostrarLancarNota, setMostrarLancarNota] = useState(false);
+  const [mostrarH1, setMostrarH1] = useState(true)
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [mostrarLista, setMostrarLista] = useState(true);
   const { setFlashMessage } = useFlashMessage();
   const { disciplinaId } = useParams();
+  const { alunoId } = useParams();
   const [alunos, setAlunos] = useState([]);
   const [contagemPresencasFaltas, setContagemPresencasFaltas] = useState({});
 
@@ -65,10 +70,19 @@ const AlunosMatriculados = () => {
     setMostrarH1(false)
   };
 
+  const handleClickLancarNotas = () => {
+    setMostrarLancarNota(true);
+    setMostrarFormulario(false);
+    setMostrarLista(false);
+    setMostrarH1(false)
+  };
+
+
+
   return (
     <div>
-    {mostrarH1 && (
-      <h1>Alunos Matriculados na Disciplina</h1>)}
+      {mostrarH1 && (
+        <h1>Alunos Matriculados na Disciplina</h1>)}
       {mostrarLista && (
         <table>
           <thead>
@@ -96,19 +110,24 @@ const AlunosMatriculados = () => {
       {mostrarLista && alunos.length === 0 && <p>Nenhum aluno matriculado nesta disciplina.</p>}
 
       {mostrarFormulario ? (
-        <RegistrarAula
-          disciplinaId={disciplinaId}
-        // handleFlashMessage={handleFlashMessage} // Passe a função handleFlashMessage para o componente RegistrarAula
-        />
+        <RegistrarAula disciplinaId={disciplinaId} />
       ) : (
-        <button className={styles.registrarAulasBtn} onClick={handleClickRegistrarAulas}>
-          Clique aqui para registrar a aula de hoje!
-        </button>
-      )}
+        <>
+          {!mostrarLancarNota && (
+            <button className={styles.registrarAulasBtn} onClick={handleClickRegistrarAulas}>
+              Clique aqui para registrar a aula de hoje!
+            </button>
+          )}
 
-      {/* <div className={styles.flashMessage}>
-  <Message />
-</div> */}
+          {mostrarLancarNota ? (
+            <LancarNotas disciplinaId={disciplinaId} alunoId={alunoId} />
+          ) : (
+            <Link to={"lancar-notas"} className={styles.registrarAulasBtn} onClick={handleClickLancarNotas}>
+              Clique aqui para lançar as notas!
+            </Link>
+          )}
+        </>
+      )}
     </div>
   );
 };

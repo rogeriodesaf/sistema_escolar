@@ -11,15 +11,16 @@ const notaSchema = new mongoose.Schema({
     ref: 'Disciplina',
     required: true
   },
-  nota: {
+  nota: [{
     type: Number,
     required: true
-  },
+  }]
+,  
   
     status: {
       type: String,
       enum: ['Aprovado', 'Reprovado'],
-      required: true,
+      
     },
   });
   
