@@ -65,3 +65,23 @@
 
 
 
+  .form_containerlabel{
+    margin-bottom: .3em;
+    font-weight: bold;
+    font-size: .8em;
+
+}
+
+.form_container input{
+    padding: .7em;
+    border:  1px solid #777;
+    border-radius: 5px;
+
+
+}
+
+.form_container input::placeholder{
+    color: #7b7b;
+    
+
+}

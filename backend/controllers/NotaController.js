@@ -126,21 +126,30 @@ module.exports = class NotaController {
   
       // Encontre todas as notas do aluno na disciplina
       const notas = await Nota.find({ aluno: alunoId, disciplina: disciplinaId });
+
+      console.log(notas)
   
       // Calcule a média das notas
       const totalNotas = notas.length;
+      console.log(totalNotas)
       const somaNotas = notas.reduce((acumulador, nota) => acumulador + nota.nota, 0);
+console.log(somaNotas)
+  
       const media = somaNotas / totalNotas;
+ 
+      if(media>=7){
+        res.status(200).json({ message:'Aprovado' , media});
+      } else {
+        res.status(200).json({ message:'Reprovado', media });
+      }
+
   
-      // Determine se o aluno foi aprovado ou reprovado com base na média
-      const status = media >= 7 ? 'Aprovado' : 'Reprovado';
-  
-      res.json({ media, status });
+     
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: 'Erro ao calcular média do aluno.' });
+      res.status(500).json({ message: 'Erro ao calcular a média do aluno.' });
     }
-  }
+  };
   
 
 };

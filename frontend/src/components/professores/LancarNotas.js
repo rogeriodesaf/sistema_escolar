@@ -13,7 +13,7 @@ const LancarNotas = () => {
   const [nota, setNota] = useState('');
   const { disciplinaId } = useParams();
   const [alunos, setAlunos] = useState([]);
-  const [notas, setNotas] = useState([]);
+  const [notas, setNotas] = useState({});
   const { setFlashMessage } = useFlashMessage();
 
 
@@ -32,23 +32,14 @@ const LancarNotas = () => {
     fetchAlunos();
   }, [disciplinaId]);
 
-  const handleNotaChange = (alunoId, nota) => {
-    setNotas((prevNotas)=>(
-      {
-        ...prevNotas,
-        [alunoId]:nota,
-      }
-    ));
-   // console.log('alunoId:', alunoId);
-   // console.log('nota:', nota);
-    
-    //setAlunoId(alunoId);
-   // setNota(nota);
-
-    
-  
-
-  };
+  const handleOnChange = (alunoId, nota) => {
+  console.log('alunoId:', alunoId);
+  console.log('nota:', nota);
+  setNotas((prevNotas) => ({
+    ...prevNotas,
+    [alunoId]: nota,
+  }));
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,22 +52,27 @@ const LancarNotas = () => {
       for (const alunoId in notas) {
         const nota = notas[alunoId];
         await axios.post(`http://localhost:5000/api/notas/${disciplinaId}/aluno/${alunoId}`, { nota });
+       
       }
         
 
-     console.log('Notas enviadas com sucesso!');
-    // Limpar os valores após o envio, se necessário
-    limparCampos()
+     console.log('Notas enviadas com sucesso!',nota);
+    
+     limparCampos();
+     e.target.reset(); // Redefine os valores dos campos do formulário para o estado inicial
+   
   } catch (error) {
     console.error('Erro ao enviar as notas:', error);
   }
   setFlashMessage(msgText, msgType);
 };
 
-  const limparCampos = () => {
-    console.log('limpando campos')
+const limparCampos = () => {
+  setNotas({});
+  setAlunoId('');
+};
    
-  };
+  
 
   return (
     <div>
@@ -94,10 +90,10 @@ const LancarNotas = () => {
               <tr key={aluno._id}>
                 <td>{aluno.firstName} {aluno.lastName}</td>
                 <td>
-                  <Input
-                    type="number"
+                  <input
+                    type='number'
                     defaultValue={notas[aluno._id] || ''}
-                    onChange={(e) => handleNotaChange(aluno._id, e.target.value)}
+                    onChange={(e) => handleOnChange(aluno._id, e.target.value)}
                     placeholder='Insira aqui a nota do aluno!'
                   />
                 </td>
@@ -105,7 +101,7 @@ const LancarNotas = () => {
             ))}
           </tbody>
         </table>
-        <button className={stylesButton.formButton} onClick={limparCampos} type="submit">Lançar Notas</button>
+        <button className={stylesButton.formButton}  type="submit">Lançar Notas</button>
       </form>
     </div>
   );
