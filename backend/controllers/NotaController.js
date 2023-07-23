@@ -44,15 +44,13 @@ module.exports = class NotaController {
       const { nota } = req.body;
 
        // Verifique se o usuário possui permissão para lançar notas
-       const userRole = req.user.role;
-       if (authorizationLevels[userRole].includes('lancarNotas')) {
+      /// const userRole = req.user.role;
+    //   if (authorizationLevels[userRole].includes('lancarNotas')) {
          // Atualizar a nota no banco de dados
       const notaAtualizada = await Nota.findByIdAndUpdate(notaId, { nota }, { new: true });
       // Retornar a nota atualizada
       res.status(201).json({ message: 'Nota atualizada com sucesso' });
-    } else {
-      res.status(403).json({ error: 'Usuário não autorizado a lançar notas.' });
-    }
+    
  } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Erro ao atualizar nota.' });
@@ -107,8 +105,11 @@ module.exports = class NotaController {
       // Mapear as notas para incluir o nome do aluno e o nome da disciplina na resposta
       const notasDisciplinaComNomeAluno = notasDisciplina.map((nota) => ({
         _id: nota._id,
+        alunoId: nota.aluno._id, // Incluímos o alunoId aqui
         aluno: nota.aluno.firstName,
         disciplina: nota.disciplina.nome,
+        disciplinaId : nota.disciplina._id,
+        
         nota: nota.nota,
         __v: nota.__v,
       }));

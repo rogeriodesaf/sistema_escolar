@@ -31,16 +31,18 @@ const Navbar = () => {
             )}
 
 
-            {authenticated && userType === 'professor' && (
+            { userType === 'professor' && (
               <>
               <li>
                 <Link to="/disciplinas/professor">Suas turmas</Link>
               </li>
                
-           
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
              </>
             )}
-
+            
 
 
 

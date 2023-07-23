@@ -4,11 +4,13 @@ import RegistrarAula from '../../professores/RegistrarAula'
 import useFlashMessage from '../../../hooks/useFlashMessage';
 import { Link } from 'react-router-dom'
 import LancarNotas from '../../professores/LancarNotas'
+import MediaAlunos from '../../professores/MediaAlunos'
 
 import styles from './AlunosMatriculadosNaDisciplina.module.css';
 
 const AlunosMatriculados = () => {
 
+  const [mostrarMedia, setMostrarMedia] = useState(false);
   const [mostrarLancarNota, setMostrarLancarNota] = useState(false);
   const [mostrarH1, setMostrarH1] = useState(true)
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -75,6 +77,14 @@ const AlunosMatriculados = () => {
     setMostrarFormulario(false);
     setMostrarLista(false);
     setMostrarH1(false)
+    setMostrarMedia(false)
+  };
+
+  const handleClickMostrarMedia= () => {
+    setMostrarMedia(true)
+    setMostrarFormulario(false);
+    setMostrarLista(false);
+    setMostrarH1(false)
   };
 
 
@@ -109,22 +119,36 @@ const AlunosMatriculados = () => {
       )}
       {mostrarLista && alunos.length === 0 && <p>Nenhum aluno matriculado nesta disciplina.</p>}
 
+      
       {mostrarFormulario ? (
         <RegistrarAula disciplinaId={disciplinaId} />
       ) : (
         <>
-          {!mostrarLancarNota && (
+          {!mostrarLancarNota && !mostrarMedia && (
             <button className={styles.registrarAulasBtn} onClick={handleClickRegistrarAulas}>
               Clique aqui para registrar a aula de hoje!
             </button>
           )}
-
           {mostrarLancarNota ? (
             <LancarNotas disciplinaId={disciplinaId} alunoId={alunoId} />
           ) : (
-            <Link to={"lancar-notas"} className={styles.registrarAulasBtn} onClick={handleClickLancarNotas}>
-              Clique aqui para lançar as notas!
-            </Link>
+            <>
+              {mostrarMedia && <MediaAlunos disciplinaId={disciplinaId} alunoId={alunoId} />}
+              {!mostrarMedia && !mostrarLancarNota && (
+                <button className={styles.registrarAulasBtn} onClick={handleClickLancarNotas}>
+                  Clique aqui para lançar as notas!
+                </button>
+              )}
+              {!mostrarMedia && (
+                <Link
+                  to={`mostrar-media`}
+                  className={styles.registrarAulasBtn}
+                  onClick={handleClickMostrarMedia}
+                >
+                  Clique aqui para ver as médias dos alunos!
+                </Link>
+              )}
+            </>
           )}
         </>
       )}

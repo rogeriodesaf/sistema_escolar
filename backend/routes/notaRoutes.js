@@ -7,13 +7,13 @@ const NotaController = require('../controllers/NotaController');
 router.post('/:disciplinaId/aluno/:alunoId', NotaController.criarNota);
 
 // Rota para atualizar uma nota existente
-router.put('/:notaId', authMiddleware, NotaController.atualizarNota);
+router.put('/:notaId', NotaController.atualizarNota);
 
 // Rota para obter as notas de um aluno específico
 router.get('/aluno/:alunoId', NotaController.obterNotasAluno);
 
 // Rota para obter as notas de uma disciplina específica
-router.get('/disciplina/:disciplinaId', authMiddleware, NotaController.obterNotasDisciplina);
+router.get('/disciplina/:disciplinaId', NotaController.obterNotasDisciplina);
 
 // Outras rotas relacionadas a notas...
 // Rotas para cálculo da média do aluno em uma disciplina

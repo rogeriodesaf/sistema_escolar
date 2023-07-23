@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Title } from './styles';
+import { Container, Title } from '../forms/Form.module.css';
 
 function Professores() {
   return (

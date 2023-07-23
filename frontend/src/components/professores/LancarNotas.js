@@ -5,6 +5,8 @@ import useFlashMessage from '../../hooks/useFlashMessage'
 import Input from '../forms/Input'
 import styles from '../forms/Form.module.css'
 import stylesButton from '../professores/RegistrarAula.module.css';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const LancarNotas = () => {
@@ -15,7 +17,7 @@ const LancarNotas = () => {
   const [alunos, setAlunos] = useState([]);
   const [notas, setNotas] = useState({});
   const { setFlashMessage } = useFlashMessage();
-
+  const history = useHistory();
 
 
 
@@ -65,6 +67,7 @@ const LancarNotas = () => {
     console.error('Erro ao enviar as notas:', error);
   }
   setFlashMessage(msgText, msgType);
+  history.push('/disciplinas/professor');
 };
 
 const limparCampos = () => {
@@ -103,6 +106,9 @@ const limparCampos = () => {
         </table>
         <button className={stylesButton.formButton}  type="submit">Lançar Notas</button>
       </form>
+      <Link to={`/disciplinas/professor`}>
+        Voltar 
+      </Link>
     </div>
   );
 };
