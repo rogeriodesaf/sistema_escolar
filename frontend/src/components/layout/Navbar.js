@@ -23,11 +23,18 @@ const Navbar = () => {
       <ul>
 
         {authenticated ? (
+        
           <>
             {authenticated && userType === 'aluno' && (
+               <>
               <li>
                 <Link to="/user/profile">Perfil Aluno</Link>
               </li>
+
+              <li>
+              <Link to="/alunos/disciplinas">Suas turmas</Link>
+            </li>
+            </>
             )}
 
 

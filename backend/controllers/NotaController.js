@@ -1,6 +1,6 @@
 const Nota = require('../models/Nota');
 const authorizationLevels = require('../helpers/authorizations');
-const Users = require('../models/Users');
+const User = require('../models/Users');
 const Disciplina = require('../models/disciplinaModel');
 
 
@@ -149,6 +149,42 @@ console.log(somaNotas)
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Erro ao calcular a média do aluno.' });
+    }
+  };
+
+  static async notasAlunoDisciplina(req, res) {
+    try {
+      const { disciplinaId, alunoId } = req.params;
+  
+      // Buscar todas as notas da disciplina no banco de dados
+      const notasDisciplina = await Nota.find({ disciplina: disciplinaId ,aluno: alunoId})
+        .populate({
+          path: 'aluno',
+          model: User,
+          select: 'firstName',
+        })
+        .populate({
+          path: 'disciplina',
+          model: Disciplina,
+          select: 'nome',
+        });
+  
+      // Mapear as notas para incluir o nome do aluno e o nome da disciplina na resposta
+      const notasDisciplinaComNomeAluno = notasDisciplina.map((nota) => ({
+        _id: nota._id,
+        alunoId: nota.aluno._id, // Incluímos o alunoId aqui
+        aluno: nota.aluno.firstName,
+        disciplina: nota.disciplina.nome,
+        disciplinaId : nota.disciplina._id,
+        
+        nota: nota.nota,
+        __v: nota.__v,
+      }));
+  
+      res.json(notasDisciplinaComNomeAluno);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Erro ao obter notas da disciplina.' });
     }
   };
   

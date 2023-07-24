@@ -356,6 +356,36 @@ module.exports = class AuthController {
     }
   }
   
+  static async obterPresencasEFaltasPorDisciplina(req, res) {
+    try {
+      const { alunoId, disciplinaId } = req.params;
+  
+      // Buscar a disciplina pelo id
+      const disciplina = await Disciplina.findById(disciplinaId);
+  
+      if (!disciplina) {
+        return res.status(404).json({ error: 'Disciplina não encontrada' });
+      }
+  
+      // Buscar as informações de presenças e faltas do aluno na disciplina
+      const alunoDisciplina = disciplina.alunos.find((aluno) => aluno._id === alunoId);
+      console.log(disciplina.alunos)
+
+      console.log(disciplina.alunos._id)
+      
+  
+      if (!alunoDisciplina) {
+        return res.status(404).json({ error: 'Aluno não encontrado nesta disciplina' });
+      }
+  
+      const { presencas, faltas } = alunoDisciplina;
+  
+      res.json({ presencas, faltas });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao buscar informações de presenças e faltas' });
+    }
+  }
 
 };
 

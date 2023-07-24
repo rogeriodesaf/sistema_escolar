@@ -19,5 +19,7 @@ router.get('/disciplina/:disciplinaId', NotaController.obterNotasDisciplina);
 // Rotas para cálculo da média do aluno em uma disciplina
 router.get('/alunos/:alunoId/disciplinas/:disciplinaId/media', NotaController.calcularMediaAluno);
 
+router.get('/alunos/:alunoId/disciplinas/:disciplinaId/notas',NotaController.notasAlunoDisciplina)
+
 
 module.exports = router;

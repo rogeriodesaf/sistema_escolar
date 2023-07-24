@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import styles from '../pages/Disciplinas/AlunosMatriculadosNaDisciplina.module.css';
 
+
 const DetalhesAluno = (props) => {
 
   const alunoId = props.match.params.alunoId;

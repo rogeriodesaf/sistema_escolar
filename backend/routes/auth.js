@@ -76,6 +76,8 @@ router.get('/disciplinas/:disciplinaId/alunos', AuthController.alunosMatriculado
 
 router.get('/alunos/:alunoId/disciplinas/:disciplinaId/presencas',AuthController.contadorPresencas);
 
+router.get('/aluno/:alunoId/disciplina/:disciplinaId', AuthController.obterPresencasEFaltasPorDisciplina);
+
 
 
 

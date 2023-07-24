@@ -33,6 +33,9 @@ import MediaAlunos from '../src/components/professores/MediaAlunos'
 import DetalhesAluno from '../src/components/alunos/DetalhesAluno'
 import EditarNota from './components/professores/EditarNota';
 
+import Alunos from './components/alunos/Alunos';
+import DetalhesDisciplinaAluno from './components/alunos/DetalhesDisciplinaAluno'
+
 function App() {
   return (
     <Router>
@@ -64,6 +67,10 @@ function App() {
                   <Route path="/alunos-list">
                     <Profile />
                   </Route>
+
+
+                  <Route path="/alunos/disciplinas" component={Alunos} /> {/* Rota para a página de disciplinas matriculadas dos alunos */}
+                  <Route exact path="/disciplinas/:disciplinaId/alunos/:alunoId/detalhes" component={DetalhesDisciplinaAluno} />
 
                   <Route path="/disciplinas-list">
                     <DisciplineList />
