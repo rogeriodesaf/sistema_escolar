@@ -65,7 +65,7 @@ module.exports = class NotaController {
       const notasAluno = await Nota.find({ aluno: alunoId })
         .populate({
           path: 'aluno',
-          model: Users,
+          model: User,
           select: 'firstName',
         })
         .populate('disciplina', 'nome');
@@ -93,7 +93,7 @@ module.exports = class NotaController {
       const notasDisciplina = await Nota.find({ disciplina: disciplinaId })
         .populate({
           path: 'aluno',
-          model: Users,
+          model: User,
           select: 'firstName',
         })
         .populate({

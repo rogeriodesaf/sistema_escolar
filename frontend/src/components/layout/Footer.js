@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p>
-        <span className='bold'>Este é o footer da aplicação.</span> &copy; 2023
+        <span className='bold'>Desenvolvido por Rogério de Sá - Analista de Sistemas e Engenharia de Softwares.</span> &copy; 2023
 
         </p>
     </footer>

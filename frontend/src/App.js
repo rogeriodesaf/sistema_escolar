@@ -15,11 +15,17 @@ import Container from './components/layout/Container';
 import Message from './components/layout/Message';
 import { UserProvider } from './context/UserContext';
 
-import HomeProfessor from '../src/components/professores/index'
+import HomeCoordenador from './components/coordenadores/PaginaCoordenador'
+import VisualizarAlunos from './components/coordenadores/VisualizarAluno';
+
+
 import { ProfessorProvider } from './context/ProfessorContext';
-import { DisciplinaProvider , DisciplinaContext} from './context/DisciplinaContext';
+import { DisciplinaProvider, DisciplinaContext } from './context/DisciplinaContext';
 import { Context } from './context/UserContext';
 import AdicionarProfessorNaDisciplina from './components/pages/AddProfessorNaDisciplina';
+import HomeProfessor from './components/professores/PaginaProfessores'
+
+
 import AlunoDisciplinaForm from './components/forms/MatriculaAlunoForm';
 import DisciplinasDoProfessor from './components/professores/DisciplinasDoProfessor';
 import AlunosMatriculados from './components/pages/Disciplinas/AlunosMatriculadosNaDisciplina';
@@ -35,89 +41,118 @@ import EditarNota from './components/professores/EditarNota';
 
 import Alunos from './components/alunos/Alunos';
 import DetalhesDisciplinaAluno from './components/alunos/DetalhesDisciplinaAluno'
+import PaginaAluno from './components/alunos/PaginaAluno';
+import HomeAluno from './components/alunos/PaginaAluno'
+import HistoricoAluno from './components/alunos/HistoricoAluno';
+import DirecionamentoHistorico from './components/alunos/DirecionamentoAoHistorico';
 
 function App() {
   return (
     <Router>
-       
+
       <UserProvider>
         <Context.Consumer>
           {({ authenticated, userType, updateUserType }) => (
-             <DisciplinaProvider>
+            <DisciplinaProvider>
               {/* Use o contexto da disciplina para acessar o ID da disciplina */}
               <DisciplinaContext.Consumer>
-              {({ disciplinaId }) => (
-                <>
-                 
-                 <Navbar authenticated={authenticated} userType={userType} disciplinaId={disciplinaId} />
-             
-              <Message />
-              <Container>
-                <Switch>
-                  <Route path="/cadastro-disciplinas">
-                    <DisciplinaForm updateUserType={updateUserType} />
-                  </Route>
-                  <Route path="/adicionar-professor-na-disciplina">
-                    <AdicionarProfessorNaDisciplina updateUserType={updateUserType} />
-                  </Route>
-                  <Route path="/matricular-alunos">
-                    <AlunoDisciplinaForm updateUserType={updateUserType} />
-                  </Route>
+                {({ disciplinaId ,alunoId}) => (
+                  <>
 
-                  <Route path="/alunos-list">
-                    <Profile />
-                  </Route>
+                    <Navbar authenticated={authenticated} userType={userType} disciplinaId={disciplinaId} alunoId={alunoId}/>
+
+                    <Message />
+                    <Container>
+                      <Switch>
+                        <Route path="/cadastro-disciplinas">
+                          <DisciplinaForm updateUserType={updateUserType} />
+                        </Route>
+                        <Route path="/adicionar-professor-na-disciplina">
+                          <AdicionarProfessorNaDisciplina updateUserType={updateUserType} />
+                        </Route>
+                        <Route path="/matricular-alunos">
+                          <AlunoDisciplinaForm updateUserType={updateUserType} />
+                        </Route>
+
+                        <Route path="/alunos-list">
+                          <Profile />
+                        </Route>
+
+                        <Route path="/aluno">
+                          <PaginaAluno alunoId={alunoId}/>
+                        </Route>
+                       
+
+                       
+                        <Route path="/alunos/historico"  component={DirecionamentoHistorico} />
+                        <Route path="/alunos/disciplinas" component={Alunos} /> {/* Rota para a página de disciplinas matriculadas dos alunos */}
+                        <Route exact path="/disciplinas/:disciplinaId/alunos/:alunoId/detalhes" component={DetalhesDisciplinaAluno} />
+                        <Route path="/aluno/historico">
+                          <HistoricoAluno alunoId = {alunoId}/>
+                        </Route>
+                        <Route path="/aluno/historico/direcionamento">
+                          <DirecionamentoHistorico alunoId = {alunoId}/>
+                        </Route>
+                        <Route path="/historico-escolar"  component={VisualizarAlunos} /> 
+                        <Route path="/historico/:alunoId" alunoId = {alunoId} component={HistoricoAluno} /> {/* Rota para o histórico do aluno */}
+
+                        <Route path="/disciplinas-list">
+                          <DisciplineList />
+                        </Route>
+                        <Route path="/home">
+                          <Home />
+                          </Route>
+                          <Route path="/home-aluno">
+                          <HomeAluno />
+                        </Route>
+                        <Route path="/login">
+                          <Login updateUserType={updateUserType} />
+                        </Route>
+                        <Route path="/register">
+                          <Register />
+                        </Route>
+                        <Route path="/user/profile">
+                          <Profile />
+                        </Route>
+
+                        <Route path="/home-coordenador">
+                          <HomeCoordenador />
+                        </Route>
+                       {/* <Route path="/professor/profile">
+                          <HomeProfessor />  */}
+
+                          <Route path="/home-professor">
+                          <HomeProfessor />
+                        </Route>
+                       
+                        <Route path="/disciplinas/professor">
+                          <DisciplinasDoProfessor />
+                        </Route>
+                        <Route path="/disciplinas/:disciplinaId" component={AlunosMatriculados} />
 
 
-                  <Route path="/alunos/disciplinas" component={Alunos} /> {/* Rota para a página de disciplinas matriculadas dos alunos */}
-                  <Route exact path="/disciplinas/:disciplinaId/alunos/:alunoId/detalhes" component={DetalhesDisciplinaAluno} />
+                        <Route path="/lancar-nota" component={LancarNotas} />
+                        <Route path="/mostrar-media" component={MediaAlunos} />
+                        <Route exact path="/disciplina/:disciplinaId/alunos/:alunoId/detalhes" component={DetalhesAluno} />
+                        <Route path="/disciplina/:disciplinaId/aluno/:alunoId/editar-nota/:notaId" component={EditarNota} />
 
-                  <Route path="/disciplinas-list">
-                    <DisciplineList />
-                  </Route>
-                  <Route path="/home">
-                    <Home />
-                  </Route>
-                  <Route path="/login">
-                    <Login updateUserType={updateUserType} />
-                  </Route>
-                  <Route path="/register">
-                    <Register />
-                  </Route>
-                  <Route path="/user/profile">
-                    <Profile />
-                  </Route>
-                  <Route path="/professor/profile">
-                    <HomeProfessor />
-                  </Route>
-                  <Route path="/disciplinas/professor">
-                    <DisciplinasDoProfessor />
-                  </Route>
-                  <Route path="/disciplinas/:disciplinaId" component={AlunosMatriculados} />
+                        <ProfessorProvider>
+                          <Route path="/professor/register">
+                            <ProfessorRegister />
+                          </Route>
+                          <Route path="/disciplinas/:disciplinaId" component={PresencasFaltas} />
 
-              
-                  <Route path="/lancar-nota" component={LancarNotas} />
-                  <Route path="/mostrar-media" component={MediaAlunos} />
-                  <Route exact path="/disciplina/:disciplinaId/alunos/:alunoId/detalhes" component={DetalhesAluno} />
-                  <Route path="/disciplina/:disciplinaId/aluno/:alunoId/editar-nota/:notaId" component={EditarNota} />
+                        </ProfessorProvider>
 
-                  <ProfessorProvider>
-                    <Route path="/professor/register">
-                      <ProfessorRegister />
-                    </Route>
-                    <Route path="/disciplinas/:disciplinaId" component={PresencasFaltas} />
-
-                  </ProfessorProvider>
-
-                </Switch>
-              </Container>
-              <Footer />
-            </>
-            )}
-            </DisciplinaContext.Consumer>
+                      </Switch>
+                    </Container>
+                    <Footer />
+                  </>
+                )}
+              </DisciplinaContext.Consumer>
             </DisciplinaProvider>
           )}
-          
+
         </Context.Consumer>
       </UserProvider>
     </Router>

@@ -192,44 +192,62 @@ module.exports = class ProfessorController {
     }
   };
 
- static async listarProfessores (req, res) {
-  try {
-    // Consulte o banco de dados ou outra fonte de dados para obter a lista de professores
-    const professores = await Professor.find();
+  static async listarProfessores(req, res) {
+    try {
+      // Consulte o banco de dados ou outra fonte de dados para obter a lista de professores
+      const professores = await Professor.find();
 
-    res.status(200).json(professores);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erro ao listar os professores.' });
-  }
-
- }
-
- static async listarDisciplinasProfessor(req, res) {
-  try {
-    const { professorId } = req.params;
-     console.log()
-    // Verifique se o professor existe
-    const professor = await Professor.findById(professorId);
-
-    if (!professor) {
-      return res.status(404).json({ error: 'Professor não encontrado' });
+      res.status(200).json(professores);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erro ao listar os professores.' });
     }
 
-    // Obtenha as disciplinas associadas ao professor
-    const disciplinas = await Disciplina.find({ _id: { $in: professor.disciplinas } });
-
-    res.json(disciplinas);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro ao listar as disciplinas do professor' });
   }
+
+  static async listarDisciplinasProfessor(req, res) {
+    try {
+      const { professorId } = req.params;
+      console.log()
+      // Verifique se o professor existe
+      const professor = await Professor.findById(professorId);
+
+      if (!professor) {
+        return res.status(404).json({ error: 'Professor não encontrado' });
+      }
+
+      // Obtenha as disciplinas associadas ao professor
+      const disciplinas = await Disciplina.find({ _id: { $in: professor.disciplinas } });
+
+      res.json(disciplinas);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao listar as disciplinas do professor' });
+    }
+  }
+  static async getProfessorById(req, res) {
+    try {
+      const { professorId } = req.params;
+      const professor = await Professor.findById(professorId);
+
+      if (!professor) {
+        return res.status(404).json({ error: 'Professor não encontrado' });
+      }
+
+      // Aqui você pode escolher quais informações do professor quer retornar
+      // Estou retornando um objeto contendo apenas o nome do professor neste exemplo
+      const professorInfo = { name: professor.name };
+
+      res.json(professorInfo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao obter informações do professor' });
+    }
+
+
+  };
+
 }
-
-
-};
-
-
 
 
 

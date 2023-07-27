@@ -4,7 +4,7 @@ import api from '../../utils/api';
 import useFlashMessage from '../../hooks/useFlashMessage'
 import { Link } from 'react-router-dom';
 import DisciplinasMatriculadasAluno from './DisciplinasMatriculadasAluno';
-
+import HistoricoAluno from './HistoricoAluno';
 
 
 
@@ -49,6 +49,7 @@ function AlunosDisciplinas() {
      {/* <Link to={`/disciplinas/${disciplinaId}/mostrar-media`}>
         Voltar para Médias dos Alunos
       </Link> */}
+      
     </div>
   );
  

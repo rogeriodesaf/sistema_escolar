@@ -24,7 +24,7 @@ const NotasAlunoDisciplina = () => {
 
   return (
     <div className={styles.notas_aluno}>
-      <h3>Notas do Aluno</h3>
+      <h3 >Notas do Aluno</h3>
       <table>
         <thead>
           <tr>

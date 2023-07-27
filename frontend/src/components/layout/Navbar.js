@@ -25,14 +25,18 @@ const Navbar = () => {
         {authenticated ? (
         
           <>
-            {authenticated && userType === 'aluno' && (
+            { userType === 'aluno' && (
                <>
               <li>
-                <Link to="/user/profile">Perfil Aluno</Link>
+                <Link to="/home-aluno">Home</Link>
               </li>
 
               <li>
               <Link to="/alunos/disciplinas">Suas turmas</Link>
+            </li>
+
+            <li>
+              <Link to="/alunos/historico">Histórico Escolar</Link>
             </li>
             </>
             )}
@@ -45,7 +49,7 @@ const Navbar = () => {
               </li>
                
               <li>
-                <Link to="/home">Home</Link>
+                <Link to="/home-professor">Home</Link>
               </li>
              </>
             )}
@@ -55,6 +59,10 @@ const Navbar = () => {
 
             {authenticated && userType === 'coordenador' && (
               <>
+              <li>
+                  <Link to="/home-coordenador">Home</Link>
+
+                </li>
                 <li>
                   <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
 
@@ -71,6 +79,10 @@ const Navbar = () => {
                 <li>
                   <Link to="/alunos-list">Listagem de Alunos</Link>
                 </li>
+                <li>
+                <Link to="/historico-escolar">Histórico Escolar</Link>
+                </li>
+
               </>
             )}
 

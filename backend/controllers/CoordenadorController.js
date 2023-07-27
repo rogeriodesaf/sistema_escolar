@@ -197,7 +197,27 @@ module.exports = class CoordenadorController {
     }
   };
 
+  static async getCoordenadorById(req, res) {
+    try {
+      const { coordenadorId } = req.params;
+      const coordenador = await User.findById(coordenadorId);
 
+      if (!coordenador) {
+        return res.status(404).json({ error: 'Aluno não encontrado' });
+      }
+
+      // Aqui você pode escolher quais informações do professor quer retornar
+      // Estou retornando um objeto contendo apenas o nome do professor neste exemplo
+      const coordenadorInfo = { name: coordenador.name };
+
+      res.json(coordenadorInfo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao obter informações do aluno' });
+    }
+
+
+  };
 
 };
 

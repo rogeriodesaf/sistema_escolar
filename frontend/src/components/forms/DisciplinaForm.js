@@ -6,6 +6,7 @@ import useFlashMessage from '../../hooks/useFlashMessage';
 import bus from '../../utils/bus';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../context/UserContext';
+import Message from '../layout/Message.module.css'
 
 import Input from './Input';
 
@@ -36,7 +37,8 @@ function DisciplineForm({ btnText }) {
       setFlashMessage('Você precisa estar autenticado para cadastrar uma disciplina');
       return;
     }
-    let msgType = 'success'
+    let msgText = 'Cadastro realizado com sucesso!';
+    let msgType = 'sucess';
   
     const data  = await api.post('/api/disciplinas', discipline, {
         headers: {
@@ -53,8 +55,8 @@ function DisciplineForm({ btnText }) {
         msgType = 'error'
         return err.response.data
       })
-      setFlashMessage(data.message, msgType)
-    history.push('/home')
+      setFlashMessage(msgText, msgType);
+    history.push('/home-coordenador')
   };
 
   return (

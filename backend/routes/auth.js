@@ -44,6 +44,8 @@ router.post('/coordenador/login', CoordenadorController.login);
 router.post('/coordenador/register', CoordenadorController.register);
 router.post('/coordenador/forgot-password', CoordenadorController.forgotPassword);
 router.post('/coordenador/reset-password', CoordenadorController.resetPassword);
+router.post('/coordenador/:coordenadorId', CoordenadorController.getCoordenadorById);
+
 
 
 
@@ -56,6 +58,8 @@ router.post('/professors/reset-password', ProfessorController.resetPassword);
 router.get('/professors/listar', ProfessorController.listarProfessores);
 // Rota para mostrar a disciplina que o professor vai lecionar com os alunos
 router.get('/professores/:professorId/disciplinas', ProfessorController.listarDisciplinasProfessor);
+// Rota para pegar as informações de um professor pelo Id
+router.get('/professores/:professorId', ProfessorController.getProfessorById);
 
 // Rotas dos alunos
 router.post('/students/login', AuthController.login);
@@ -63,6 +67,8 @@ router.post('/students/register', AuthController.register);
 router.post('/students/forgot-password', AuthController.forgotPassword);
 router.post('/students/reset-password', AuthController.resetPassword);
 router.get('/students/listar', AuthController.listarAlunos);
+// Rota para pegar as informações de um professor pelo Id
+router.get('/alunos/:alunoId', AuthController.getAlunoById);
 
 // Rota para matricular um aluno em uma disciplina
 router.post('/disciplinas/:disciplinaId/alunos/:alunoId',AuthController.matricularAluno);

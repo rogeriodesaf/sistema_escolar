@@ -32,7 +32,7 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   }
 
-  async function loginProfessor(user) {
+  async function loginProfessor(user,userType) {
     let msgText = 'Login realizado com sucesso!';
     let msgType = 'success';
 
@@ -41,7 +41,7 @@ export default function useAuth() {
         return response.data;
       });
 
-      await authUser(data);
+      await authUser(data,userType);
       console.log(data);
     } catch (error) {
       msgText = error.response.data.error;
@@ -51,7 +51,7 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   }
 
-  async function loginCoordenador(user) {
+  async function loginCoordenador(user,userType) {
     let msgText = 'Login realizado com sucesso!';
     let msgType = 'sucess';
 
@@ -60,7 +60,7 @@ export default function useAuth() {
         return response.data;
       });
 
-      await authUser(data);
+      await authUser(data,userType);
       console.log(data);
     } catch (error) {
       msgText = error.response.data.error;
@@ -82,9 +82,9 @@ export default function useAuth() {
           return response.data;
         });
         console.log(data);
-        await authUser(data);
+        await authUser(data,userType);
       } else if (userType === 'professor') {
-        loginProfessor(user);
+        loginProfessor(user,userType);
       } else if (userType === 'coordenador') {
         loginCoordenador(user);
       }
@@ -95,10 +95,17 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   };
 
-  async function authUser(data) {
+  async function authUser(data,userType) {
     setAuthenticated(true);
     localStorage.setItem('token', JSON.stringify(data.token));
-    history.push('/home');
+    if(userType === 'aluno'){
+      history.push('/home-aluno');
+    } else if (userType === 'professor'){
+      history.push('/home-professor');
+    } else if(userType === 'coordenador'){
+      history.push('/home-coordenador')
+    }
+ 
   }
 
   async function logout() {

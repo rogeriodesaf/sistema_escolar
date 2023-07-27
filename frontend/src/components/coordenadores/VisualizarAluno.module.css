@@ -1,0 +1,34 @@
+.pagination_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .previous,
+  .next {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .previous:hover,
+  .next:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  
+  .active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  

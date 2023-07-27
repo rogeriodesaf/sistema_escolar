@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import styles from './EditarNota.module.css'
 
 const EditarNota = () => {
     const {  disciplinaId, alunoId } = useParams();
@@ -35,14 +36,14 @@ const EditarNota = () => {
   };
 
   return (
-    <div>
-      <h1>Editar Nota do Aluno</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Editar Nota do Aluno</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className={styles.label}>
           Nova Nota:
-          <input type="number" value={novaNota} onChange={(e) => setNovaNota(e.target.value)} />
+          <input type="number" value={novaNota} className={styles.input} onChange={(e) => setNovaNota(e.target.value)} />
         </label>
-        <button type="submit">Atualizar Nota</button>
+        <button type="submit" className={styles.button}>Atualizar Nota</button>
       </form>
     </div>
   );

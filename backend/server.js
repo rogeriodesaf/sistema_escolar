@@ -25,6 +25,7 @@ const historicoRoutes = require('./routes/historicoAluno')
 
 
 
+
 // Importa a conexão com o banco de dados
 //require('./db/connection');
 

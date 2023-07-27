@@ -386,6 +386,28 @@ module.exports = class AuthController {
       res.status(500).json({ error: 'Erro ao buscar informações de presenças e faltas' });
     }
   }
+  static async getAlunoById(req, res) {
+    try {
+      const { alunoId } = req.params;
+      const aluno = await User.findById(alunoId);
+
+      if (!aluno) {
+        return res.status(404).json({ error: 'Aluno não encontrado' });
+      }
+
+      // Aqui você pode escolher quais informações do professor quer retornar
+      // Estou retornando um objeto contendo apenas o nome do professor neste exemplo
+      const alunoInfo = { name: aluno.firstName };
+
+      res.json(alunoInfo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao obter informações do aluno' });
+    }
+
+
+  };
+
 
 };
 
