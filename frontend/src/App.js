@@ -45,6 +45,8 @@ import PaginaAluno from './components/alunos/PaginaAluno';
 import HomeAluno from './components/alunos/PaginaAluno'
 import HistoricoAluno from './components/alunos/HistoricoAluno';
 import DirecionamentoHistorico from './components/alunos/DirecionamentoAoHistorico';
+import ResetPasswordPage from './components/alunos/ResetPassword';
+import ResetPassword from './components/alunos/RedefinicaoSenha'
 
 function App() {
   return (
@@ -82,7 +84,8 @@ function App() {
                           <PaginaAluno alunoId={alunoId}/>
                         </Route>
                        
-
+                        <Route exact path="/reset-password" component={ResetPasswordPage} /> {/* Adicione esta rota */}
+                        <Route path="/api/auth/students/reset-password/:token" component={ResetPassword} />
                        
                         <Route path="/alunos/historico"  component={DirecionamentoHistorico} />
                         <Route path="/alunos/disciplinas" component={Alunos} /> {/* Rota para a página de disciplinas matriculadas dos alunos */}

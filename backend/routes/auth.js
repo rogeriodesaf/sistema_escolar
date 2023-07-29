@@ -65,7 +65,7 @@ router.get('/professores/:professorId', ProfessorController.getProfessorById);
 router.post('/students/login', AuthController.login);
 router.post('/students/register', AuthController.register);
 router.post('/students/forgot-password', AuthController.forgotPassword);
-router.post('/students/reset-password', AuthController.resetPassword);
+router.post('/students/reset-password/:token', AuthController.resetPassword);
 router.get('/students/listar', AuthController.listarAlunos);
 // Rota para pegar as informações de um professor pelo Id
 router.get('/alunos/:alunoId', AuthController.getAlunoById);

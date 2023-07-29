@@ -126,12 +126,13 @@ module.exports = class AuthController {
 
 
     // Cria um link de redefinição de senha com o token
-    const resetLink = `http://localhost:3000/api/auth/reset-password/${token}`;
+    const resetLink = `http://localhost:3000/api/auth/students/reset-password/${token}`;
     const mailOptions = {
       from: 'rogeriodesaf@gmail.com',
       to: email,
       subject: 'Recuperação de Senha',
-      html: `<p>Olá, você solicitou a recuperação de senha para a sua conta .Clique no<a href='${resetLink}'>link</a> a seguir para redefinir sua senha:</p>`
+      html: `<p>Olá, você solicitou a recuperação de senha para a sua conta .Clique no<a href='${resetLink}'> link</a> a seguir para redefinir sua senha:
+       Copie o seu Token para redefinição de senha: ${token} </p>`
       // ${process.env.RESET_PASSWORD_URL}/${token}`,
     };
 
